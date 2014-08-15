@@ -76,7 +76,7 @@ fantasyData.Byes(season, function(err, results){
   * e.g., 732
 * ``` searchCriteria ```
   * Used only for MatchPlayer method
-  ```
+  ```javascript
   {
     team: 'IND',
     firstName: 'Andrew',
