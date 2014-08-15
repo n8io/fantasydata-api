@@ -1,18 +1,19 @@
 {
   "name": "fantasydata-api",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "The api wrapper for the FantasyData.com",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/.bin/mocha ./test/test.js"
   },
   "keywords": [
     "FantasyData",
     "Fantasy",
-    "Football"
+    "Football",
+    "NflData"
   ],
-  "author": "",
-  "license": "ISC",
+  "author": "Nate Clark",
+  "license": "MIT",
   "dependencies": {
     "async": "^0.9.0",
     "request": "^2.40.0",

@@ -12,7 +12,7 @@ describe('FantasyData', function(){
   var week = 1;
   var team = 'IND';
   var statsColumn = 'PassingYards';
-  var timeFrameType = 'REG';
+  var timeFrameType = 'current';
 
   var player = {
     id: 14008,
