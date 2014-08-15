@@ -4,7 +4,7 @@ ___
 [![Build Status](https://drone.io/github.com/n8io/fantasydata-api/status.png)](https://drone.io/github.com/n8io/fantasydata-api/latest)
 
 
-This is a nodeJs wrapper for the [FantasyData.com](fantasydata.com)'s api. Fully tested with mocha.
+This is a nodeJs wrapper for the [FantasyData.com](fantasydata.com)'s api. Fully tested using mocha.
 
 ##Installation
 This can easily be installed via npm
@@ -76,7 +76,7 @@ fantasyData.Byes(season, function(err, results){
   * e.g., 732
 * ``` searchCriteria ```
   * Used only for MatchPlayer method
-  * ```
+  ```
   {
     team: team,
     firstName: 'Andrew',
@@ -86,7 +86,8 @@ fantasyData.Byes(season, function(err, results){
     dob: null,
     position: 'QB',
     college: null
-  } ```
+  }
+  ```
 
 ##Methods
 
