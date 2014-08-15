@@ -78,7 +78,7 @@ fantasyData.Byes(season, function(err, results){
   * Used only for MatchPlayer method
   ```
   {
-    team: team,
+    team: 'IND',
     firstName: 'Andrew',
     lastName: 'Luck',
     fullName: null,
