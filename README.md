@@ -15,7 +15,7 @@ npm install fantasydata-api
 
 ##Example Usage
 
-```
+```javascript
 var fantasyData = require('fantasydata-api')(options);
 
 var season = '2014PRE';
@@ -41,12 +41,12 @@ fantasyData.Byes(season, function(err, results){
     "Week": 4
   },
   ...
- ]
+]
 ```
 
 ##Options
 
-```
+```javascript
 {
   protocol: 'http',
   url: 'api.nfldata.apiphany.com',
@@ -67,7 +67,7 @@ fantasyData.Byes(season, function(err, results){
   * The unique abbreviation for a given team
   * e.g., IND, ARI, NO, GB, etc
 * ``` statColumn ```
-  * Any given numerical stat column on a PlayerGame object
+  * Any given numerical stat column on a [PlayerGame object](http://fantasydata.com/resources/data-dictionary.aspx)
   * PassingYards, ReceivingTargets, RushingTouchdowns, etc
 * ``` position ```
   * A given player's position
