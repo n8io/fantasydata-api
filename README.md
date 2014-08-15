@@ -18,7 +18,7 @@ npm install fantasydata-api
 ```
 var fantasyData = require('fantasydata-api')(options);
 
-var season = 2014;
+var season = '2014PRE';
 fantasyData.Byes(season, function(err, results){
     console.log(JSON.stringify(results, null, 2));
 })
@@ -56,11 +56,44 @@ fantasyData.Byes(season, function(err, results){
 }
 ```
 
+##Parameters
+* ``` season ```
+  * Year of the season and the season type. If no season type is provided, then the default is regular season.
+  * e.g., 2013REG, 2013PRE, 2013POST, etc
+* ``` week ```
+  * Integer representing a given week
+  * Valid values are 1-21
+* ``` team ```
+  * The unique abbreviation for a given team
+  * e.g., IND, ARI, NO, GB, etc
+* ``` statColumn ```
+  * Any given numerical stat column on a PlayerGame object
+  * PassingYards, ReceivingTargets, RushingTouchdowns, etc
+* ``` position ```
+  * A given player's position
+* ``` playerId ```
+  * The integer identifier for a given player
+  * e.g., 732
+* ``` searchCriteria ```
+  * Used only for MatchPlayer method
+  * ```
+  {
+    team: team,
+    firstName: 'Andrew',
+    lastName: 'Luck',
+    fullName: null,
+    number: null,
+    dob: null,
+    position: 'QB',
+    college: null
+  } ```
+
 ##Methods
+
 * ```ActiveBoxScores(callback)```
 * ```AreAnyGamesInProgress(callback)```
 * ```BoxScore(season, week, homeTeam, callback)```
-* ```BoxScores(season, week,callback)```
+* ```BoxScores(season, week, callback)```
 * ```Byes(season)(callback)```
 * ```CurrentSeason(callback)```
 * ```CurrentWeek(callback)```
@@ -73,26 +106,13 @@ fantasyData.Byes(season, function(err, results){
 * ```GameLeagueLeaders(season, week, position, statColumn, callback)```
 * ```GameStats(season, callback)```
 * ```GameStatsByWeek(season, week, callback)```
-* ```GetErrorSample(callback)``` Currently does not work
+* ```GetErrorSample(callback)```
 * ```InjuriesByTeam(season, week, team, callback)```
 * ```InjuriesByWeek(season, week, callback)```
 * ```LastCompletedSeason(callback)```
 * ```LastCompletedWeek(callback)```
 * ```LiveBoxScores(callback)```
 * ```MatchPlayer(searchCriteria, callback)```
-  * Sample search criteria:
-  ```
-  {
-    team: team,
-    firstName: 'Andrew',
-    lastName: 'Luck',
-    fullName: null,
-    number: null,
-    dob: null,
-    position: 'QB',
-    college: null
-  }
-  ```
 * ```News(callback)```
 * ```NewsByPlayerId(playerId, callback)```
 * ```NewsByTeam(team, callback)```
