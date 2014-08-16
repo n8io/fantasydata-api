@@ -1,5 +1,5 @@
 # fantasydata-api
-v0.1.0
+v0.1.1
 ___
 [![Build Status](https://drone.io/github.com/n8io/fantasydata-api/status.png)](https://drone.io/github.com/n8io/fantasydata-api/latest)
 
