@@ -13,12 +13,24 @@ This can easily be installed via npm
 npm install fantasydata-api
 ```
 
+##Options
+
+```javascript
+var options = {
+  protocol: 'http',
+  url: 'api.nfldata.apiphany.com',
+  level: 'developer',
+  timeout: 10000,
+  key: '' // <-- Pass in your key here
+};
+```
+
 ##Example Usage
 
 ```javascript
 var fantasyData = require('fantasydata-api')(options);
 
-var season = '2014PRE';
+var season = '2014REG';
 fantasyData.Byes(season, function(err, results){
     console.log(JSON.stringify(results, null, 2));
 })
@@ -44,22 +56,10 @@ fantasyData.Byes(season, function(err, results){
 ]
 ```
 
-##Options
-
-```javascript
-{
-  protocol: 'http',
-  url: 'api.nfldata.apiphany.com',
-  level: 'developer',
-  timeout: 10000,
-  key: '' // <-- Pass in your key here
-}
-```
-
 ##Parameters
 * ``` season ```
   * Year of the season and the season type. If no season type is provided, then the default is regular season.
-  * e.g., 2013REG, 2013PRE, 2013POST, etc
+  * e.g., 2013REG, 2013PRE, 2013POST, 2013, etc
 * ``` week ```
   * Integer representing a given week
   * Valid values are 1-21
@@ -76,18 +76,18 @@ fantasyData.Byes(season, function(err, results){
   * e.g., 732
 * ``` searchCriteria ```
   * Used only for MatchPlayer method
-  ```javascript
-  {
-    team: 'IND',
-    firstName: 'Andrew',
-    lastName: 'Luck',
-    fullName: null,
-    number: null,
-    dob: null,
-    position: 'QB',
-    college: null
-  }
-  ```
+```javascript
+var searchCriteria = {
+  team: 'IND',
+  firstName: 'Andrew',
+  lastName: 'Luck',
+  fullName: null,
+  number: null,
+  dob: null,
+  position: 'QB',
+  college: null
+};
+```
 
 ##Methods
 
