@@ -12,13 +12,29 @@ module.exports = function(options){
     key: ''
   };
 
+  options = options || {};
   options.format = 'json';
 
-  var config = _.extend(defaults, options || {});
+  var config = _.extend(defaults, options);
 
   // TODO: Add validation for config
 
   var FantasyData = function(){};
+
+  FantasyData.Options = function(opts){
+    var isSetter = !!opts;
+
+    opts = opts || {};
+
+    opts.format = 'json'; // Always json
+
+    if(isSetter){
+      config = _.extend(defaults, opts);
+    }
+    else{
+      return _.extend(defaults, opts);
+    }
+  };
 
   FantasyData.ActiveBoxScores = function(callback){
     var uri = buildUrl('ActiveBoxScores');
@@ -317,7 +333,8 @@ module.exports = function(options){
 
   function getDefaultOptions(uri){
     return {
-      url: uri,
+      scheme: config.protocol,
+      uri: uri,
       method: 'get',
       json: true,
       timeout: config.timeout || 3000

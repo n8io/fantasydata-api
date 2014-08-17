@@ -1,6 +1,7 @@
 # fantasydata-api
-v0.1.2
+v0.2.1
 ___
+[![NPM](https://nodei.co/npm/fantasydata-api.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/fantasydata-api/)
 [![Build Status](https://drone.io/github.com/n8io/fantasydata-api/status.png)](https://drone.io/github.com/n8io/fantasydata-api/latest)
 
 
@@ -32,8 +33,8 @@ var fantasyData = require('fantasydata-api')(options);
 
 var season = '2014REG';
 fantasyData.Byes(season, function(err, results){
-    console.log(JSON.stringify(results, null, 2));
-})
+  console.log(JSON.stringify(results, null, 2));
+});
 
 /* Returns */
 [

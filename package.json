@@ -1,8 +1,8 @@
 {
   "name": "fantasydata-api",
-  "version": "0.1.2",
+  "version": "0.2.1",
   "description": "A clean and tested wrapper for the FantasyData.com api",
-  "main": "./lib/fantasyData.js",
+  "main": "./server/fantasydata-api.js",
   "homepage": "https://github.com/n8io/fantasydata-api",
   "repository": {
     "type": "git",

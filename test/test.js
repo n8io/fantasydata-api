@@ -4,7 +4,7 @@ if(process.env.API_KEY){
   config.key = process.env.API_KEY;
 }
 
-var FantasyData = require('../lib/fantasyData')(config);
+var FantasyData = require('../server/fantasydata-api')(config);
 var expect = require('expect.js')
 
 describe('FantasyData', function(){
