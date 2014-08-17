@@ -1,17 +1,23 @@
 # fantasydata-api
-v0.2.1
+
+This library is a wrapper for the [FantasyData.com](http://www.fantasydata.com)'s api. Fully tested using mocha.
+
+v0.2.1 [![Build Status](https://drone.io/github.com/n8io/fantasydata-api/status.png)](https://drone.io/github.com/n8io/fantasydata-api/latest)
 ___
+
 [![NPM](https://nodei.co/npm/fantasydata-api.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/fantasydata-api/)
-[![Build Status](https://drone.io/github.com/n8io/fantasydata-api/status.png)](https://drone.io/github.com/n8io/fantasydata-api/latest)
-
-
-This is a nodeJs wrapper for the [FantasyData.com](http://www.fantasydata.com)'s api. Fully tested using mocha.
+___
 
 ##Installation
+###Server
 This can easily be installed via npm
 
 ```
 npm install fantasydata-api
+```
+###Client
+```html
+<script src="./client/fantasydata-api.js"></script>
 ```
 
 ##Options
@@ -27,7 +33,7 @@ var options = {
 ```
 
 ##Example Usage
-
+### Server
 ```javascript
 var fantasyData = require('fantasydata-api')(options);
 
@@ -35,26 +41,17 @@ var season = '2014REG';
 fantasyData.Byes(season, function(err, results){
   console.log(JSON.stringify(results, null, 2));
 });
+```
 
-/* Returns */
-[
-  {
-    "Season": 2014,
-    "Team": "ARI",
-    "Week": 4
-  },
-  {
-    "Season": 2014,
-    "Team": "CIN",
-    "Week": 4
-  },
-  {
-    "Season": 2014,
-    "Team": "CLE",
-    "Week": 4
-  },
-  ...
-]
+### Client
+```html
+<script>
+  fantasyData.Options(options);
+
+  fantasyData.Byes(season, function(err, results){
+    console.log(JSON.stringify(results, null, 2));
+  });
+</script>
 ```
 
 ##Parameters
