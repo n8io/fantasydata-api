@@ -1,5 +1,5 @@
 # fantasydata-api
-v0.1.1
+v0.1.2
 ___
 [![Build Status](https://drone.io/github.com/n8io/fantasydata-api/status.png)](https://drone.io/github.com/n8io/fantasydata-api/latest)
 
@@ -91,6 +91,8 @@ var searchCriteria = {
 ```
 
 ##Methods
+
+For more information as to what each method returns, take a look at the [official documentation](https://developer.fantasydata.com/api-documentation).
 
 * ```ActiveBoxScores(callback)```
 * ```AreAnyGamesInProgress(callback)```
