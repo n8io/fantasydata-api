@@ -48,6 +48,7 @@ fantasyData.Byes(season, function(err, results){
 <script>
   fantasyData.Options(options);
 
+  var season = '2014REG';
   fantasyData.Byes(season, function(err, results){
     console.log(JSON.stringify(results, null, 2));
   });
