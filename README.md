@@ -4,7 +4,7 @@ ___
 [![Build Status](https://drone.io/github.com/n8io/fantasydata-api/status.png)](https://drone.io/github.com/n8io/fantasydata-api/latest)
 
 
-This is a nodeJs wrapper for the [FantasyData.com](fantasydata.com)'s api. Fully tested using mocha.
+This is a nodeJs wrapper for the [FantasyData.com](http://www.fantasydata.com)'s api. Fully tested using mocha.
 
 ##Installation
 This can easily be installed via npm
