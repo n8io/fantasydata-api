@@ -71,6 +71,7 @@ fantasyData.Byes(season, function(err, results){
   * PassingYards, ReceivingTargets, RushingTouchdowns, etc
 * ``` position ```
   * A given player's position
+  * Valid values are QB, RB, WR, TE, K, P, DL, LB, DB and in Match Player cases DE, DT, C, G, CB, OLB, S as well
 * ``` playerId ```
   * The integer identifier for a given player
   * e.g., 732
