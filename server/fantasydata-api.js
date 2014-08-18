@@ -17,8 +17,6 @@ module.exports = function(options){
 
   var config = _.extend(defaults, options);
 
-  // TODO: Add validation for config
-
   var FantasyData = function(){};
 
   FantasyData.Options = function(opts){
@@ -29,6 +27,8 @@ module.exports = function(options){
     opts.format = 'json'; // Always json
 
     if(isSetter){
+      if(!validateConfig(config)) return;
+
       config = _.extend(defaults, opts);
     }
     else{
@@ -317,6 +317,62 @@ module.exports = function(options){
 
     makeRequest(uri, callback);
   };
+
+  function validateConfig(cfg){
+    var isValid = true;
+
+    if(console && !console.error){
+      console.error = console.log;
+    }
+
+    if(isNaN(cfg.timeout)){
+      console.error('Timeout in (ms) must be a valid number.')
+      isValid = false;
+    }
+
+    var validLevels = [
+      "trial",
+      "developer",
+      "standard",
+      "weekly",
+      "enterprise"
+    ];
+
+    if(validLevels.indexOf(cfg.level.toLowerCase()) === -1){
+      console.error('The given level: ' + cfg.level + ' is not supported at this time. Value must be one of the following: ' + validLevels.join(','));
+      isValid = false;
+    }
+
+    var validProtocols = [
+      "http"
+    ];
+
+    if(validProtocols.indexOf(cfg.protocol.toLowerCase()) === -1){
+      console.error('The given protocol: ' + cfg.protocol + ' is not supported at this time. Value must be one of the following: ' + validProtocols.join(','));
+      isValid = false;
+    }
+
+    var validUrls = [
+      "api.nfldata.apiphany.com"
+    ];
+
+    if(validUrls.indexOf(cfg.url.toLowerCase()) === -1){
+      console.error('The given url: ' + cfg.url + ' is not supported at this time. Value must be one of the following: ' + validUrls.join(','));
+      isValid = false;
+    }
+
+    var guidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+    if(guidRegex.test(cfg.key) === false){
+      console.error('The given key: ' + (cfg.key || 'empty string') + ' is not valid. Value must be a valid guid.');
+      isValid = false;
+    }
+
+    if(!isValid){
+      console.error('Invalid configuration. Use the fantasyData.Options(options) method and try again.');
+    }
+
+    return isValid;
+  }
 
   function makeRequest(uri, callback){
     request(getDefaultOptions(uri), function(err, results){

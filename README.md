@@ -2,7 +2,7 @@
 
 This library is a wrapper for the [FantasyData.com](http://bit.ly/fantasydata)'s api. Fully tested using mocha.
 
-v0.2.2 [![Build Status](https://drone.io/github.com/n8io/fantasydata-api/status.png)](https://drone.io/github.com/n8io/fantasydata-api/latest)
+v0.2.3 [![Build Status](https://drone.io/github.com/n8io/fantasydata-api/status.png)](https://drone.io/github.com/n8io/fantasydata-api/latest)
 
 [![NPM](https://nodei.co/npm/fantasydata-api.png?downloads=true&stars=true)](http://bit.ly/npm-downloads-img)
 
@@ -11,7 +11,8 @@ This wrapper provides a simple way of interacting with the exposed methods of Fa
 
 (1) Please note that most modern browsers will not allow cross
 origin requests, so unfortunately the client library will not
-function as expected in these cases.
+function as expected in these cases. There is currently [an open issue](http://bit.ly/fantasydata-issues-104)
+regarding this restriction.
 
 ##Installation
 ###Server
@@ -102,6 +103,12 @@ fantasyData.Byes(season, function(err, results){
 
 For more information as to what each method returns, take a look at the [official documentation](http://bit.ly/fantasydata-api-documentation).
 
+###Helpers
+* ```Options()``` - Get the current options
+* ```Options(options)``` - Set the options
+
+###API
+All methods are asynchronous and require the last parameter to be a callback function ```function(err, results) {}```.
 * ```ActiveBoxScores(callback)```
 * ```AreAnyGamesInProgress(callback)```
 * ```BoxScore(season, week, homeTeam, callback)```
