@@ -1,11 +1,11 @@
 # fantasydata-api
 
-This library is a wrapper for the [FantasyData.com](http://www.fantasydata.com)'s api. Fully tested using mocha.
+This library is a wrapper for the [FantasyData.com](http://bit.ly/fantasydata)'s api. Fully tested using mocha.
 
 v0.2.2 [![Build Status](https://drone.io/github.com/n8io/fantasydata-api/status.png)](https://drone.io/github.com/n8io/fantasydata-api/latest)
 ___
 
-[![NPM](https://nodei.co/npm/fantasydata-api.png?downloads=true&stars=true)](https://nodei.co/npm/fantasydata-api/)
+[![NPM](https://nodei.co/npm/fantasydata-api.png?downloads=true&stars=true)](http://bit.ly/npm-downloads-img)
 ___
 
 ##Installation
@@ -66,11 +66,15 @@ fantasyData.Byes(season, function(err, results){
   * The unique abbreviation for a given team
   * e.g., IND, ARI, NO, GB, etc
 * ``` statColumn ```
-  * Any given numerical stat column on a [PlayerGame object](http://fantasydata.com/resources/data-dictionary.aspx)
+  * Any given numerical stat column on a [PlayerGame object](http://bit.ly/fantasydata-data-dictionary)
   * PassingYards, ReceivingTargets, RushingTouchdowns, etc
 * ``` position ```
   * A given player's position
   * Valid values are QB, RB, WR, TE, K, P, DL, LB, DB and in Match Player cases DE, DT, C, G, CB, OLB, S as well
+
+* ``` timeFrameType ```
+  * Valid types are:
+  * Current, Upcoming, Completed, Recent, All. Visit the [official documentation](http://bit.ly/fantasydata-timeframes) for more information on these timeframes.
 * ``` playerId ```
   * The integer identifier for a given player
   * e.g., 732
@@ -91,7 +95,7 @@ var searchCriteria = {
 
 ##Methods
 
-For more information as to what each method returns, take a look at the [official documentation](https://developer.fantasydata.com/api-documentation).
+For more information as to what each method returns, take a look at the [official documentation](http://bit.ly/fantasydata-api-documentation).
 
 * ```ActiveBoxScores(callback)```
 * ```AreAnyGamesInProgress(callback)```
