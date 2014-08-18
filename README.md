@@ -3,10 +3,15 @@
 This library is a wrapper for the [FantasyData.com](http://bit.ly/fantasydata)'s api. Fully tested using mocha.
 
 v0.2.2 [![Build Status](https://drone.io/github.com/n8io/fantasydata-api/status.png)](https://drone.io/github.com/n8io/fantasydata-api/latest)
-___
 
 [![NPM](https://nodei.co/npm/fantasydata-api.png?downloads=true&stars=true)](http://bit.ly/npm-downloads-img)
-___
+
+##Intro
+This wrapper provides a simple way of interacting with the exposed methods of FantasyData's api. It can be used both on the client(1) and the server. Both are generated from the same code base and are validated via the same mocha tests.
+
+(1) Please note that most modern browsers will not allow cross
+origin requests, so unfortunately the client library will not
+function as expected in these cases.
 
 ##Installation
 ###Server
@@ -61,7 +66,7 @@ fantasyData.Byes(season, function(err, results){
   * e.g., 2013REG, 2013PRE, 2013POST, 2013, etc
 * ``` week ```
   * Integer representing a given week
-  * Valid values are 1-21
+  * Valid values are: Preseason 0 to 4, Regular Season 1 to 17, Postseason 1 to 4.
 * ``` team ```
   * The unique abbreviation for a given team
   * e.g., IND, ARI, NO, GB, etc
@@ -73,25 +78,25 @@ fantasyData.Byes(season, function(err, results){
   * Valid values are QB, RB, WR, TE, K, P, DL, LB, DB and in Match Player cases DE, DT, C, G, CB, OLB, S as well
 
 * ``` timeFrameType ```
-  * Valid types are:
-  * Current, Upcoming, Completed, Recent, All. Visit the [official documentation](http://bit.ly/fantasydata-timeframes) for more information on these timeframes.
+  * The type of timeframes to return.
+  * Valid types are current, upcoming, completed, recent, all. Visit the [timeframe documentation](http://bit.ly/fantasydata-timeframes) for more info.
 * ``` playerId ```
   * The integer identifier for a given player
   * e.g., 732
 * ``` searchCriteria ```
   * Used only for MatchPlayer method
-```javascript
-var searchCriteria = {
-  team: 'IND',
-  firstName: 'Andrew',
-  lastName: 'Luck',
-  fullName: null,
-  number: null,
-  dob: null,
-  position: 'QB',
-  college: null
-};
-```
+  ```javascript
+  var searchCriteria = {
+    team: 'IND',
+    firstName: 'Andrew',
+    lastName: 'Luck',
+    fullName: null,
+    number: null,
+    dob: null,
+    position: 'QB',
+    college: null
+  };
+  ```
 
 ##Methods
 
