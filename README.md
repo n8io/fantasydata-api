@@ -89,7 +89,7 @@ fantasyData.Byes(season, function(err, results){
   * The integer representing the time in minutes to look back for updates
   * e.g., 1,2,5,10
 * ``` searchCriteria ```
-  * Currenlty only used by the MatchPlayer method
+  * Currently only used by the MatchPlayer method
   ```javascript
   var searchCriteria = {
     team: 'IND',
