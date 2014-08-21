@@ -27,7 +27,7 @@ module.exports = function(options){
     opts.format = 'json'; // Always json
 
     if(isSetter){
-      if(!validateConfig(config)) return;
+      if(!validateConfig(opts)) return;
 
       config = _.extend(defaults, opts);
     }
@@ -230,6 +230,12 @@ module.exports = function(options){
 
   FantasyData.PlayerSeasonStatsByTeam = function(season, team, callback){
     var uri = buildUrl('PlayerSeasonStatsByTeam/{{season}}/{{team}}', {season:season,team:team});
+
+    makeRequest(uri, callback);
+  };
+
+  FantasyData.RecentlyUpdatedBoxScores = function(minutes, callback){
+    var uri = buildUrl('RecentlyUpdatedBoxScores/{{minutes}}', {minutes:minutes});
 
     makeRequest(uri, callback);
   };
