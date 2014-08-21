@@ -2,7 +2,7 @@
 
 This library is a wrapper for the [FantasyData.com](http://bit.ly/fantasydata)'s api. Fully tested using mocha.
 
-v0.2.3 [![Build Status](https://drone.io/github.com/n8io/fantasydata-api/status.png)](https://drone.io/github.com/n8io/fantasydata-api/latest)
+v0.2.4 [![Build Status](https://drone.io/github.com/n8io/fantasydata-api/status.png)](https://drone.io/github.com/n8io/fantasydata-api/latest)
 
 [![NPM](https://nodei.co/npm/fantasydata-api.png?downloads=true&stars=true)](http://bit.ly/npm-downloads-img)
 
@@ -84,8 +84,12 @@ fantasyData.Byes(season, function(err, results){
 * ``` playerId ```
   * The integer identifier for a given player
   * e.g., 732
+* ``` minutes ```
+  * Currently only used by the RecentlyUpdatedBoxScores method
+  * The integer representing the time in minutes to look back for updates
+  * e.g., 1,2,5,10
 * ``` searchCriteria ```
-  * Used only for MatchPlayer method
+  * Currently only used by the MatchPlayer method
   ```javascript
   var searchCriteria = {
     team: 'IND',
@@ -142,6 +146,7 @@ All methods are asynchronous and require the last parameter to be a callback fun
 * ```PlayerGameStatsByWeek(season, week, callback)```
 * ```PlayerSeasonStatsByPlayerId(season, playerId, callback)```
 * ```PlayerSeasonStatsByTeam(season, team, callback)```
+* ```RecentlyUpdatedBoxScores(minutes, callback)```
 * ```Schedules(season, callback)```
 * ```Scores(season,callback)```
 * ```ScoresByWeek(season, week, callback)```

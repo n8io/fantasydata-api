@@ -1,9 +1,9 @@
 <html>
   <head>
-    <script src="../client/fantasydata-api.js"></script>
+    <script src="../client/fantasydata-api.min.js"></script>
   </head>
   <body>
-    See the console for results!
+    See the console for details...
     <script>
       var options = {
         protocol: 'http',
@@ -12,6 +12,10 @@
         timeout: 10000,
         key: '' // <-- Pass in your key here
       };
+
+      console.log('options:', options);
+
+      fantasyData.Options(options);
     </script>
   </body>
 </html>
