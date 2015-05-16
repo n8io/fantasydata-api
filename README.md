@@ -2,7 +2,7 @@
 
 This library is a wrapper for the [FantasyData.com](http://bit.ly/fantasydata)'s api. Fully tested using mocha.
 
-v0.2.4 [![Build Status](https://drone.io/github.com/n8io/fantasydata-api/status.png)](https://drone.io/github.com/n8io/fantasydata-api/latest)
+v1.2.1 [![Build Status](https://drone.io/github.com/n8io/fantasydata-api/status.png)](https://drone.io/github.com/n8io/fantasydata-api/latest)
 
 [![NPM](https://nodei.co/npm/fantasydata-api.png?downloads=true&stars=true)](http://bit.ly/npm-downloads-img)
 
@@ -30,35 +30,35 @@ npm install fantasydata-api
 
 ```javascript
 var options = {
-  protocol: 'http',
-  url: 'api.nfldata.apiphany.com',
-  level: 'developer',
-  timeout: 10000,
-  key: '' // <-- Pass in your key here
+  nfl: {
+    protocol: 'http',
+    version: 'trial',
+    timeout: 10000,
+    key: '' // <-- Pass in your nfl key here
+  },
+  nba: {
+    protocol: 'http',
+    version: 'nba/v2',
+    timeout: 10000,
+    key: '' // <-- Pass in your nba key here
+  },
+  mlb: {
+    protocol: 'http',
+    version: 'mlb/v2',
+    timeout: 10000,
+    key: '' // <-- Pass in your mlb key here
+  }
 };
 ```
 
 ##Example Usage
-### Server
 ```javascript
 var fantasyData = require('fantasydata-api')(options);
 
 var season = '2014REG';
-fantasyData.Byes(season, function(err, results){
+fantasyData.nfl.Byes(season, function(err, results){
   console.log(JSON.stringify(results, null, 2));
 });
-```
-
-### Client
-```html
-<script>
-  fantasyData.Options(options);
-
-  var season = '2014REG';
-  fantasyData.Byes(season, function(err, results){
-    console.log(JSON.stringify(results, null, 2));
-  });
-</script>
 ```
 
 ##Parameters
@@ -113,61 +113,64 @@ For more information as to what each method returns, take a look at the [officia
 
 ###API
 All methods are asynchronous and require the last parameter to be a callback function ```function(err, results) {}```.
-* ```ActiveBoxScores(callback)```
-* ```AreAnyGamesInProgress(callback)```
-* ```BoxScore(season, week, homeTeam, callback)```
-* ```BoxScores(season, week, callback)```
-* ```Byes(season)(callback)```
-* ```CurrentSeason(callback)```
-* ```CurrentWeek(callback)```
-* ```FantasyDefenseByGame(season, week, callback)```
-* ```FantasyDefenseBySeason(season, callback)```
-* ```FantasyDefenseProjectionsByGame(season, week, callback)```
-* ```FantasyPlayers(callback)```
-* ```FinalBoxScores(callback)```
-* ```FreeAgents(callback)```
-* ```GameLeagueLeaders(season, week, position, statColumn, callback)```
-* ```GameStats(season, callback)```
-* ```GameStatsByWeek(season, week, callback)```
-* ```GetErrorSample(callback)```
-* ```InjuriesByTeam(season, week, team, callback)```
-* ```InjuriesByWeek(season, week, callback)```
-* ```LastCompletedSeason(callback)```
-* ```LastCompletedWeek(callback)```
-* ```LiveBoxScores(callback)```
-* ```MatchPlayer(searchCriteria, callback)```
-* ```News(callback)```
-* ```NewsByPlayerId(playerId, callback)```
-* ```NewsByTeam(team, callback)```
-* ```Player(playerId, callback)```
-* ```PlayerGameProjectionStatsByTeam(season, week, team, callback)```
-* ```PlayerGameStatsByPlayerId(season, week, playerId, callback)```
-* ```PlayerGameStatsByTeam(season, week, team, callback)```
-* ```PlayerGameStatsByWeek(season, week, callback)```
-* ```PlayerSeasonStatsByPlayerId(season, playerId, callback)```
-* ```PlayerSeasonStatsByTeam(season, team, callback)```
-* ```RecentlyUpdatedBoxScores(minutes, callback)```
-* ```Schedules(season, callback)```
-* ```Scores(season,callback)```
-* ```ScoresByWeek(season, week, callback)```
-* ```SeasonLeagueLeaders(season, position, statColumn, callback)```
-* ```Stadiums(callback)```
-* ```Standings(season, callback)```
-* ```TeamGameStats(season, week, callback)```
-* ```TeamRoster(team, callback)```
-* ```TeamSeasonStats(season, callback)```
-* ```Teams(callback)```
-* ```TeamsBySeason(season, callback)```
-* ```Timeframes(timeFrameType, callback)```
-* ```UpcomingSeason(callback)```
-* ```UpcomingWeek(callback)```
+
+#### FantasyData.nfl.<method>
+
+* ```activeBoxScores(callback)```
+* ```areAnyGamesInProgress(callback)```
+* ```boxScore(season, week, homeTeam, callback)```
+* ```boxScores(season, week, callback)```
+* ```byes(season)(callback)```
+* ```currentSeason(callback)```
+* ```currentWeek(callback)```
+* ```fantasyDefenseByGame(season, week, callback)```
+* ```fantasyDefenseBySeason(season, callback)```
+* ```fantasyDefenseProjectionsByGame(season, week, callback)```
+* ```fantasyPlayers(callback)```
+* ```finalBoxScores(callback)```
+* ```freeAgents(callback)```
+* ```gameLeagueLeaders(season, week, position, statColumn, callback)```
+* ```gameStats(season, callback)```
+* ```gameStatsByWeek(season, week, callback)```
+* ```getErrorSample(callback)```
+* ```injuriesByTeam(season, week, team, callback)```
+* ```injuriesByWeek(season, week, callback)```
+* ```lastCompletedSeason(callback)```
+* ```lastCompletedWeek(callback)```
+* ```liveBoxScores(callback)```
+* ```matchPlayer(searchCriteria, callback)```
+* ```news(callback)```
+* ```newsByPlayerId(playerId, callback)```
+* ```newsByTeam(team, callback)```
+* ```player(playerId, callback)```
+* ```playerGameProjectionStatsByTeam(season, week, team, callback)```
+* ```playerGameStatsByPlayerId(season, week, playerId, callback)```
+* ```playerGameStatsByTeam(season, week, team, callback)```
+* ```playerGameStatsByWeek(season, week, callback)```
+* ```playerSeasonStatsByPlayerId(season, playerId, callback)```
+* ```playerSeasonStatsByTeam(season, team, callback)```
+* ```recentlyUpdatedBoxScores(minutes, callback)```
+* ```schedules(season, callback)```
+* ```scores(season,callback)```
+* ```scoresByWeek(season, week, callback)```
+* ```seasonLeagueLeaders(season, position, statColumn, callback)```
+* ```stadiums(callback)```
+* ```standings(season, callback)```
+* ```teamGameStats(season, week, callback)```
+* ```teamRoster(team, callback)```
+* ```teamSeasonStats(season, callback)```
+* ```teams(callback)```
+* ```teamsBySeason(season, callback)```
+* ```timeframes(timeFrameType, callback)```
+* ```upcomingSeason(callback)```
+* ```upcomingWeek(callback)```
 
 ___
 
 
 The MIT License (MIT)
 
-Copyright (c) 2014 Nate Clark
+Copyright (c) 2015 Nate Clark
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
