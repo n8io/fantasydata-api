@@ -99,7 +99,7 @@ For more information as to what each method returns, take a look at the [officia
 ###API
 All methods are asynchronous and require the last parameter to be a callback function ```function(err, results) {}```.
 
-* ```FantasyData.nfl```
+* FantasyData.nfl
   * ```.activeBoxScores(callback)```
   * ```.areAnyGamesInProgress(callback)```
   * ```.boxScore(season, week, homeTeam, callback)```
@@ -149,7 +149,7 @@ All methods are asynchronous and require the last parameter to be a callback fun
   * ```.upcomingSeason(callback)```
   * ```.upcomingWeek(callback)```
 
-* ```FantastyData.nba```
+* FantastyData.nba
   * ```.activeTeams(callback)```
   * ```.activePlayers(callback)```
   * ```.boxScore(gameId, callback)```
@@ -170,7 +170,7 @@ All methods are asynchronous and require the last parameter to be a callback fun
   * ```.teamGameStatsByDate(dateStr, callback)```
   * ```.teamSeasonStats(callback)```
 
-* ```FantastyData.mlb```
+* FantastyData.mlb
   * ```.activeTeams(callback)```
   * ```.activePlayers(callback)```
   * ```.boxScore(gameId, callback)```
