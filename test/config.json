@@ -1,15 +1,15 @@
 {
   "timeout": 15000,
   "nfl": {
-    "key": "57df087e9a4548e0a06c1862a1bc79c9",
+    "key": "",
     "version": "trial"
   },
   "mlb": {
-    "key": "347b0c1273894b9aafa2782664c0f03a",
+    "key": "",
     "version": "mlb/v2"
   },
   "nba": {
-    "key": "e7198ed3dfff4a55b028b203a7e7fca1",
+    "key": "",
     "version": "nba/v2"
   }
 }
