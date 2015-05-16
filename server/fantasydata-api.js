@@ -1,19 +1,28 @@
 var request = require('request');
-var _ = require('underscore');
+var _ = require('lodash');
 var async = require('async');
 var url = require('url');
 
 module.exports = function(options){
   var defaults = {
-    protocol: 'http',
-    url: 'api.nfldata.apiphany.com',
-    level: 'developer',
-    timeout: 10000,
-    key: ''
+    timeoout: 15000,
+    nba: {
+      version: 'nba/v2',
+      key: ''
+    },
+    nfl: {
+      version: 'trial',
+      key: ''
+    },
+    mlb: {
+      version: 'mlb/v2',
+      key: ''
+    }
   };
 
   options = options || {};
-  options.format = 'json';
+  options.url = 'api.nfldata.apiphany.com';
+  options.protocol = 'http';
 
   var config = _.extend(defaults, options);
 
@@ -27,7 +36,9 @@ module.exports = function(options){
     opts.format = 'json'; // Always json
 
     if(isSetter){
-      if(!validateConfig(opts)) return;
+      if(!opts || (!opts.nfl && !opts.mlb)) return;
+      if(opts.nfl && !validateConfig(opts.nfl)) return;
+      if(opts.mlb && !validateConfig(opts.mlb)) return;
 
       config = _.extend(defaults, opts);
     }
@@ -36,290 +47,524 @@ module.exports = function(options){
     }
   };
 
-  FantasyData.ActiveBoxScores = function(callback){
-    var uri = buildUrl('ActiveBoxScores');
+  FantasyData.mlb = {};
+
+  FantasyData.mlb.activeTeams = function(callback){
+    var uri = buildMlbUrl('Teams');
 
     makeRequest(uri, callback);
   };
 
-  FantasyData.AreAnyGamesInProgress = function(callback){
-    var uri = buildUrl('AreAnyGamesInProgress');
+  FantasyData.mlb.activePlayers = function(callback){
+    var uri = buildMlbUrl('Players');
 
     makeRequest(uri, callback);
   };
 
-  FantasyData.BoxScore = function(season, week, homeTeam, callback){
-    var uri = buildUrl('BoxScore/{{season}}/{{week}}/{{homeTeam}}', {season:season,week:week,homeTeam:homeTeam.toUpperCase()});
+  FantasyData.mlb.boxScore = function(game, callback){
+    var uri = buildMlbUrl('BoxScore/{{game}}', {game:game});
+
+    makeRequest(uri, callback);
+  }
+
+  FantasyData.mlb.boxScores = function(gameDateStr, callback){
+    var uri = buildMlbUrl('BoxScores/{{gameDateStr}}', {gameDateStr:gameDateStr});
+
+    makeRequest(uri, callback);
+  }
+
+  FantasyData.mlb.boxScoresDelta = function(gameDateStr, minutesBack, callback){
+    var uri = buildMlbUrl('BoxScoresDelta/{{gameDateStr}}/{{minutesBack}}', {gameDateStr:gameDateStr, minutesBack:minutesBack});
+
+    makeRequest(uri, callback);
+  }
+
+  FantasyData.mlb.freeAgents = function(callback){
+    var uri = buildMlbUrl('FreeAgents');
+
+    makeRequest(uri, callback);
+  }
+
+  FantasyData.mlb.gamesByDate = function(gameDateStr, callback){
+    var uri = buildMlbUrl('GamesByDate/{{gameDateStr}}', {gameDateStr:gameDateStr});
+
+    makeRequest(uri, callback);
+  }
+
+  FantasyData.mlb.gamesBySeason = function(season, callback){
+    var uri = buildMlbUrl('Games/{{season}}', {season:season});
+
+    makeRequest(uri, callback);
+  }
+
+  FantasyData.mlb.news = function(callback){
+    var uri = buildMlbUrl('News');
+
+    makeRequest(uri, callback);
+  }
+
+  FantasyData.mlb.newsByDate = function(gameDateStr, callback){
+    var uri = buildMlbUrl('NewsByDate/{{gameDateStr}}', {gameDateStr:gameDateStr});
+
+    makeRequest(uri, callback);
+  }
+
+  FantasyData.mlb.newsByPlayerId = function(playerId, callback){
+    var uri = buildMlbUrl('NewsByPlayerId/{{playerId}}', {playerId:playerId});
+
+    makeRequest(uri, callback);
+  }
+
+  FantasyData.mlb.playerGameStatsByDate = function(gameDateStr, callback){
+    var uri = buildMlbUrl('PlayerGameStatsByDate/{{gameDateStr}}', {gameDateStr:gameDateStr});
+
+    makeRequest(uri, callback);
+  }
+
+  FantasyData.mlb.playerSeasonStats = function(season, callback){
+    var uri = buildMlbUrl('PlayerSeasonStats/{{season}}', {season:season});
+
+    makeRequest(uri, callback);
+  }
+
+  FantasyData.mlb.playerSeasonStatsByTeam = function(season, team, callback){
+    var uri = buildMlbUrl('PlayerSeasonStatsByTeam/{{season}}/{{team}}', {season:season,team:team});
+
+    makeRequest(uri, callback);
+  }
+
+  FantasyData.mlb.playersByTeam = function(team, callback){
+    var uri = buildMlbUrl('Players/{{team}}', {team:team});
+
+    makeRequest(uri, callback);
+  }
+
+  FantasyData.mlb.playerGameProjectionStatsByDate = function(gameDateStr, callback){
+    var uri = buildMlbUrl('PlayerGameProjectionStatsByDate/{{gameDateStr}}', {gameDateStr:gameDateStr});
+
+    makeRequest(uri, callback);
+  }
+
+  FantasyData.mlb.stadiums = function(callback){
+    var uri = buildMlbUrl('Stadiums');
+
+    makeRequest(uri, callback);
+  }
+
+  FantasyData.mlb.teamGameStatsByDate = function(gameDateStr, callback){
+    var uri = buildMlbUrl('TeamGameStatsByDate/{{gameDateStr}}', {gameDateStr:gameDateStr});
+
+    makeRequest(uri, callback);
+  }
+
+  FantasyData.mlb.teamSeasonStats = function(season, callback){
+    var uri = buildMlbUrl('TeamSeasonStats/{{season}}', {season:season});
+
+    makeRequest(uri, callback);
+  }
+
+  FantasyData.nba = {};
+
+  FantasyData.nba.activeTeams = function(callback){
+    var uri = buildNbaUrl('Teams');
 
     makeRequest(uri, callback);
   };
 
-  FantasyData.BoxScores = function(season, week, callback){
-    var uri = buildUrl('BoxScores/{{season}}/{{week}}', {season:season,week:week});
+  FantasyData.nba.activePlayers = function(callback){
+    var uri = buildNbaUrl('Players');
 
     makeRequest(uri, callback);
   };
 
-  FantasyData.Byes = function(season, callback){
-    var uri = buildUrl('Byes/{{season}}', {season:season});
+  FantasyData.nba.boxScore = function(game, callback){
+    var uri = buildNbaUrl('BoxScore/{{game}}', {game:game});
+
+    makeRequest(uri, callback);
+  }
+
+  FantasyData.nba.boxScores = function(gameDateStr, callback){
+    var uri = buildNbaUrl('BoxScores/{{gameDateStr}}', {gameDateStr:gameDateStr});
+
+    makeRequest(uri, callback);
+  }
+
+  FantasyData.nba.boxScoresDelta = function(gameDateStr, minutesBack, callback){
+    var uri = buildNbaUrl('BoxScoresDelta/{{gameDateStr}}/{{minutesBack}}', {gameDateStr:gameDateStr, minutesBack:minutesBack});
+
+    makeRequest(uri, callback);
+  }
+
+  FantasyData.nba.freeAgents = function(callback){
+    var uri = buildNbaUrl('FreeAgents');
+
+    makeRequest(uri, callback);
+  }
+
+  FantasyData.nba.gamesByDate = function(gameDateStr, callback){
+    var uri = buildNbaUrl('GamesByDate/{{gameDateStr}}', {gameDateStr:gameDateStr});
+
+    makeRequest(uri, callback);
+  }
+
+  FantasyData.nba.gamesBySeason = function(season, callback){
+    var uri = buildNbaUrl('Games/{{season}}', {season:season});
+
+    makeRequest(uri, callback);
+  }
+
+  FantasyData.nba.news = function(callback){
+    var uri = buildNbaUrl('News');
+
+    makeRequest(uri, callback);
+  }
+
+  FantasyData.nba.newsByDate = function(gameDateStr, callback){
+    var uri = buildNbaUrl('NewsByDate/{{gameDateStr}}', {gameDateStr:gameDateStr});
+
+    makeRequest(uri, callback);
+  }
+
+  FantasyData.nba.newsByPlayerId = function(playerId, callback){
+    var uri = buildNbaUrl('NewsByPlayerId/{{playerId}}', {playerId:playerId});
+
+    makeRequest(uri, callback);
+  }
+
+  FantasyData.nba.playerGameStatsByDate = function(gameDateStr, callback){
+    var uri = buildNbaUrl('PlayerGameStatsByDate/{{gameDateStr}}', {gameDateStr:gameDateStr});
+
+    makeRequest(uri, callback);
+  }
+
+  FantasyData.nba.playerSeasonStats = function(season, callback){
+    var uri = buildNbaUrl('PlayerSeasonStats/{{season}}', {season:season});
+
+    makeRequest(uri, callback);
+  }
+
+  FantasyData.nba.playerSeasonStatsByTeam = function(season, team, callback){
+    var uri = buildNbaUrl('PlayerSeasonStatsByTeam/{{season}}/{{team}}', {season:season,team:team});
+
+    makeRequest(uri, callback);
+  }
+
+  FantasyData.nba.playersByTeam = function(team, callback){
+    var uri = buildNbaUrl('Players/{{team}}', {team:team});
+
+    makeRequest(uri, callback);
+  }
+
+  FantasyData.nba.playerGameProjectionStatsByDate = function(gameDateStr, callback){
+    var uri = buildNbaUrl('PlayerGameProjectionStatsByDate/{{gameDateStr}}', {gameDateStr:gameDateStr});
+
+    makeRequest(uri, callback);
+  }
+
+  FantasyData.nba.stadiums = function(callback){
+    var uri = buildNbaUrl('Stadiums');
+
+    makeRequest(uri, callback);
+  }
+
+  FantasyData.nba.teamGameStatsByDate = function(gameDateStr, callback){
+    var uri = buildNbaUrl('TeamGameStatsByDate/{{gameDateStr}}', {gameDateStr:gameDateStr});
+
+    makeRequest(uri, callback);
+  }
+
+  FantasyData.nba.teamSeasonStats = function(season, callback){
+    var uri = buildNbaUrl('TeamSeasonStats/{{season}}', {season:season});
+
+    makeRequest(uri, callback);
+  }
+
+  FantasyData.nfl = {};
+
+  FantasyData.nfl.activeBoxScores = function(callback){
+    var uri = buildNflUrl('ActiveBoxScores');
 
     makeRequest(uri, callback);
   };
 
-  FantasyData.CurrentSeason = function(callback){
-    var uri = buildUrl('CurrentSeason');
+  FantasyData.nfl.areAnyGamesInProgress = function(callback){
+    var uri = buildNflUrl('AreAnyGamesInProgress');
 
     makeRequest(uri, callback);
   };
 
-  FantasyData.CurrentWeek = function(callback){
-    var uri = buildUrl('CurrentWeek');
+  FantasyData.nfl.boxScore = function(season, week, homeTeam, callback){
+    var uri = buildNflUrl('BoxScore/{{season}}/{{week}}/{{homeTeam}}', {season:season,week:week,homeTeam:homeTeam.toUpperCase()});
 
     makeRequest(uri, callback);
   };
 
-  FantasyData.FantasyDefenseByGame = function(season, week, callback){
-    var uri = buildUrl('FantasyDefenseByGame/{{season}}/{{week}}', {season:season,week:week});
+  FantasyData.nfl.boxScores = function(season, week, callback){
+    var uri = buildNflUrl('BoxScores/{{season}}/{{week}}', {season:season,week:week});
 
     makeRequest(uri, callback);
   };
 
-  FantasyData.FantasyDefenseBySeason = function(season, callback){
-    var uri = buildUrl('FantasyDefenseBySeason/{{season}}', {season:season});
+  FantasyData.nfl.byes = function(season, callback){
+    var uri = buildNflUrl('Byes/{{season}}', {season:season});
 
     makeRequest(uri, callback);
   };
 
-  FantasyData.FantasyDefenseProjectionsByGame = function(season, week, callback){
-    var uri = buildUrl('FantasyDefenseProjectionsByGame/{{season}}/{{week}}', {season:season,week:week});
+  FantasyData.nfl.currentSeason = function(callback){
+    var uri = buildNflUrl('CurrentSeason');
 
     makeRequest(uri, callback);
   };
 
-  FantasyData.FantasyPlayers = function(callback){
-    var uri = buildUrl('FantasyPlayers');
+  FantasyData.nfl.currentWeek = function(callback){
+    var uri = buildNflUrl('CurrentWeek');
 
     makeRequest(uri, callback);
   };
 
-  FantasyData.FinalBoxScores = function(callback){
-    var uri = buildUrl('FinalBoxScores');
+  FantasyData.nfl.fantasyDefenseByGame = function(season, week, callback){
+    var uri = buildNflUrl('FantasyDefenseByGame/{{season}}/{{week}}', {season:season,week:week});
 
     makeRequest(uri, callback);
   };
 
-  FantasyData.FreeAgents = function(callback){
-    var uri = buildUrl('FreeAgents');
+  FantasyData.nfl.fantasyDefenseBySeason = function(season, callback){
+    var uri = buildNflUrl('FantasyDefenseBySeason/{{season}}', {season:season});
 
     makeRequest(uri, callback);
   };
 
-  FantasyData.GameLeagueLeaders = function(season, week, position, statsColumn, callback){
-    var uri = buildUrl('GameLeagueLeaders/{{season}}/{{week}}/{{position}}/{{statsColumn}}', {season:season,week:week,position:position,statsColumn:statsColumn});
+  FantasyData.nfl.fantasyDefenseProjectionsByGame = function(season, week, callback){
+    var uri = buildNflUrl('FantasyDefenseProjectionsByGame/{{season}}/{{week}}', {season:season,week:week});
 
     makeRequest(uri, callback);
   };
 
-  FantasyData.GameStats = function(season, callback){
-    var uri = buildUrl('GameStats/{{season}}', {season:season});
+  FantasyData.nfl.fantasyPlayers = function(callback){
+    var uri = buildNflUrl('FantasyPlayers');
 
     makeRequest(uri, callback);
   };
 
-  FantasyData.GameStatsByWeek = function(season, week, callback){
-    var uri = buildUrl('GameStatsByWeek/{{season}}/{{week}}', {season:season,week:week});
+  FantasyData.nfl.finalBoxScores = function(callback){
+    var uri = buildNflUrl('FinalBoxScores');
 
     makeRequest(uri, callback);
   };
 
-  FantasyData.GetErrorSample = function(callback){
-    var uri = buildUrl('GetErrorSample');
+  FantasyData.nfl.freeAgents = function(callback){
+    var uri = buildNflUrl('FreeAgents');
 
     makeRequest(uri, callback);
   };
 
-  FantasyData.InjuriesByTeam = function(season, week, team, callback){
-    var uri = buildUrl('Injuries/{{season}}/{{week}}/{{team}}', {season:season,week:week,team:team});
+  FantasyData.nfl.gameLeagueLeaders = function(season, week, position, statsColumn, callback){
+    var uri = buildNflUrl('GameLeagueLeaders/{{season}}/{{week}}/{{position}}/{{statsColumn}}', {season:season,week:week,position:position,statsColumn:statsColumn});
 
     makeRequest(uri, callback);
   };
 
-  FantasyData.InjuriesByWeek = function(season, week, callback){
-    var uri = buildUrl('Injuries/{{season}}/{{week}}', {season:season,week:week});
+  FantasyData.nfl.gameStats = function(season, callback){
+    var uri = buildNflUrl('GameStats/{{season}}', {season:season});
 
     makeRequest(uri, callback);
   };
 
-  FantasyData.LastCompletedSeason = function(callback){
-    var uri = buildUrl('LastCompletedSeason');
+  FantasyData.nfl.gameStatsByWeek = function(season, week, callback){
+    var uri = buildNflUrl('GameStatsByWeek/{{season}}/{{week}}', {season:season,week:week});
 
     makeRequest(uri, callback);
   };
 
-  FantasyData.LastCompletedWeek = function(callback){
-    var uri = buildUrl('LastCompletedWeek');
+  FantasyData.nfl.getErrorSample = function(callback){
+    var uri = buildNflUrl('GetErrorSample');
 
     makeRequest(uri, callback);
   };
 
-  FantasyData.LiveBoxScores = function(callback){
-    var uri = buildUrl('LiveBoxScores');
+  FantasyData.nfl.injuriesByTeam = function(season, week, team, callback){
+    var uri = buildNflUrl('Injuries/{{season}}/{{week}}/{{team}}', {season:season,week:week,team:team});
 
     makeRequest(uri, callback);
   };
 
-  FantasyData.MatchPlayer = function(searchCriteria, callback){
-    var uri = buildUrl('MatchPlayer', null, searchCriteria);
+  FantasyData.nfl.injuriesByWeek = function(season, week, callback){
+    var uri = buildNflUrl('Injuries/{{season}}/{{week}}', {season:season,week:week});
 
     makeRequest(uri, callback);
   };
 
-  FantasyData.News = function(callback){
-    var uri = buildUrl('News');
+  FantasyData.nfl.lastCompletedSeason = function(callback){
+    var uri = buildNflUrl('LastCompletedSeason');
 
     makeRequest(uri, callback);
   };
 
-  FantasyData.NewsByPlayerId = function(playerId, callback){
-    var uri = buildUrl('NewsByPlayerId/{{playerId}}',{playerId:playerId});
+  FantasyData.nfl.lastCompletedWeek = function(callback){
+    var uri = buildNflUrl('LastCompletedWeek');
 
     makeRequest(uri, callback);
   };
 
-  FantasyData.NewsByTeam = function(team, callback){
-    var uri = buildUrl('NewsByTeam/{{team}}',{team:team});
+  FantasyData.nfl.liveBoxScores = function(callback){
+    var uri = buildNflUrl('LiveBoxScores');
 
     makeRequest(uri, callback);
   };
 
-  FantasyData.Player = function(playerId, callback){
-    var uri = buildUrl('Player/{{playerId}}',{playerId:playerId});
+  FantasyData.nfl.matchPlayer = function(searchCriteria, callback){
+    var uri = buildNflUrl('MatchPlayer', null, searchCriteria);
 
     makeRequest(uri, callback);
   };
 
-  FantasyData.PlayerGameProjectionStatsByTeam = function(season, week, team, callback){
-    var uri = buildUrl('PlayerGameProjectionStatsByTeam/{{season}}/{{week}}/{{team}}', {season:season,week:week,team:team});
+  FantasyData.nfl.news = function(callback){
+    var uri = buildNflUrl('News');
 
     makeRequest(uri, callback);
   };
 
-  FantasyData.PlayerGameStatsByPlayerId = function(season, week, playerId, callback){
-    var uri = buildUrl('PlayerGameStatsByPlayerId/{{season}}/{{week}}/{{playerId}}', {season:season,week:week,playerId:playerId});
+  FantasyData.nfl.newsByPlayerId = function(playerId, callback){
+    var uri = buildNflUrl('NewsByPlayerId/{{playerId}}',{playerId:playerId});
 
     makeRequest(uri, callback);
   };
 
-  FantasyData.PlayerGameStatsByTeam = function(season, week, team, callback){
-    var uri = buildUrl('PlayerGameStatsByTeam/{{season}}/{{week}}/{{team}}', {season:season,week:week,team:team});
+  FantasyData.nfl.newsByTeam = function(team, callback){
+    var uri = buildNflUrl('NewsByTeam/{{team}}',{team:team});
 
     makeRequest(uri, callback);
   };
 
-  FantasyData.PlayerGameStatsByWeek = function(season, week, callback){
-    var uri = buildUrl('PlayerGameStatsByWeek/{{season}}/{{week}}', {season:season,week:week});
+  FantasyData.nfl.player = function(playerId, callback){
+    var uri = buildNflUrl('Player/{{playerId}}',{playerId:playerId});
 
     makeRequest(uri, callback);
   };
 
-  FantasyData.PlayerSeasonStatsByPlayerId = function(season, playerId, callback){
-    var uri = buildUrl('PlayerSeasonStatsByPlayerId/{{season}}/{{playerId}}', {season:season,playerId:playerId});
+  FantasyData.nfl.playerGameProjectionStatsByTeam = function(season, week, team, callback){
+    var uri = buildNflUrl('PlayerGameProjectionStatsByTeam/{{season}}/{{week}}/{{team}}', {season:season,week:week,team:team});
 
     makeRequest(uri, callback);
   };
 
-  FantasyData.PlayerSeasonStatsByTeam = function(season, team, callback){
-    var uri = buildUrl('PlayerSeasonStatsByTeam/{{season}}/{{team}}', {season:season,team:team});
+  FantasyData.nfl.playerGameStatsByPlayerId = function(season, week, playerId, callback){
+    var uri = buildNflUrl('PlayerGameStatsByPlayerId/{{season}}/{{week}}/{{playerId}}', {season:season,week:week,playerId:playerId});
 
     makeRequest(uri, callback);
   };
 
-  FantasyData.RecentlyUpdatedBoxScores = function(minutes, callback){
-    var uri = buildUrl('RecentlyUpdatedBoxScores/{{minutes}}', {minutes:minutes});
+  FantasyData.nfl.playerGameStatsByTeam = function(season, week, team, callback){
+    var uri = buildNflUrl('PlayerGameStatsByTeam/{{season}}/{{week}}/{{team}}', {season:season,week:week,team:team});
 
     makeRequest(uri, callback);
   };
 
-  FantasyData.Schedules = function(season, callback){
-    var uri = buildUrl('Schedules/{{season}}',{season:season});
+  FantasyData.nfl.playerGameStatsByWeek = function(season, week, callback){
+    var uri = buildNflUrl('PlayerGameStatsByWeek/{{season}}/{{week}}', {season:season,week:week});
 
     makeRequest(uri, callback);
   };
 
-  FantasyData.Scores = function(season, callback){
-    var uri = buildUrl('Scores/{{season}}', {season:season});
+  FantasyData.nfl.playerSeasonStatsByPlayerId = function(season, playerId, callback){
+    var uri = buildNflUrl('PlayerSeasonStatsByPlayerId/{{season}}/{{playerId}}', {season:season,playerId:playerId});
 
     makeRequest(uri, callback);
   };
 
-  FantasyData.ScoresByWeek = function(season, week, callback){
-    var uri = buildUrl('ScoresByWeek/{{season}}/{{week}}', {season:season,week:week});
+  FantasyData.nfl.playerSeasonStatsByTeam = function(season, team, callback){
+    var uri = buildNflUrl('PlayerSeasonStatsByTeam/{{season}}/{{team}}', {season:season,team:team});
 
     makeRequest(uri, callback);
   };
 
-  FantasyData.SeasonLeagueLeaders = function(season, position, statsColumn, callback){
-    var uri = buildUrl('SeasonLeagueLeaders/{{season}}/{{position}}/{{statsColumn}}', {season:season,position:position,statsColumn:statsColumn});
+  FantasyData.nfl.recentlyUpdatedBoxScores = function(minutes, callback){
+    var uri = buildNflUrl('RecentlyUpdatedBoxScores/{{minutes}}', {minutes:minutes});
 
     makeRequest(uri, callback);
   };
 
-  FantasyData.Stadiums = function(callback){
-    var uri = buildUrl('Stadiums');
+  FantasyData.nfl.schedules = function(season, callback){
+    var uri = buildNflUrl('Schedules/{{season}}',{season:season});
 
     makeRequest(uri, callback);
   };
 
-  FantasyData.Standings = function(season, callback){
-    var uri = buildUrl('Standings/{{season}}', {season:season});
+  FantasyData.nfl.scores = function(season, callback){
+    var uri = buildNflUrl('Scores/{{season}}', {season:season});
 
     makeRequest(uri, callback);
   };
 
-  FantasyData.TeamGameStats = function(season, week, callback){
-    var uri = buildUrl('TeamGameStats/{{season}}/{{week}}', {season:season,week:week});
+  FantasyData.nfl.scoresByWeek = function(season, week, callback){
+    var uri = buildNflUrl('ScoresByWeek/{{season}}/{{week}}', {season:season,week:week});
 
     makeRequest(uri, callback);
   };
 
-  FantasyData.TeamRoster = function(team, callback){
-    var uri = buildUrl('Players/{{team}}', {team:team});
+  FantasyData.nfl.seasonLeagueLeaders = function(season, position, statsColumn, callback){
+    var uri = buildNflUrl('SeasonLeagueLeaders/{{season}}/{{position}}/{{statsColumn}}', {season:season,position:position,statsColumn:statsColumn});
 
     makeRequest(uri, callback);
   };
 
-  FantasyData.TeamSeasonStats = function(season, callback){
-    var uri = buildUrl('TeamSeasonStats/{{season}}', {season:season});
+  FantasyData.nfl.stadiums = function(callback){
+    var uri = buildNflUrl('Stadiums');
 
     makeRequest(uri, callback);
   };
 
-  FantasyData.Teams = function(callback){
-    var uri = buildUrl('Teams');
+  FantasyData.nfl.standings = function(season, callback){
+    var uri = buildNflUrl('Standings/{{season}}', {season:season});
 
     makeRequest(uri, callback);
   };
 
-  FantasyData.TeamsBySeason = function(season, callback){
-    var uri = buildUrl('Teams/{{season}}', {season:season});
+  FantasyData.nfl.teamGameStats = function(season, week, callback){
+    var uri = buildNflUrl('TeamGameStats/{{season}}/{{week}}', {season:season,week:week});
 
     makeRequest(uri, callback);
   };
 
-  FantasyData.TimeFrames = function(timeFrameType, callback){
-    var uri = buildUrl('TimeFrames/{{timeFrameType}}', {timeFrameType:timeFrameType});
+  FantasyData.nfl.teamRoster = function(team, callback){
+    var uri = buildNflUrl('Players/{{team}}', {team:team});
 
     makeRequest(uri, callback);
   };
 
-  FantasyData.UpcomingSeason = function(callback){
-    var uri = buildUrl('UpcomingSeason');
+  FantasyData.nfl.teamSeasonStats = function(season, callback){
+    var uri = buildNflUrl('TeamSeasonStats/{{season}}', {season:season});
 
     makeRequest(uri, callback);
   };
 
-  FantasyData.UpcomingWeek = function(callback){
-    var uri = buildUrl('UpcomingWeek');
+  FantasyData.nfl.teams = function(callback){
+    var uri = buildNflUrl('Teams');
+
+    makeRequest(uri, callback);
+  };
+
+  FantasyData.nfl.teamsBySeason = function(season, callback){
+    var uri = buildNflUrl('Teams/{{season}}', {season:season});
+
+    makeRequest(uri, callback);
+  };
+
+  FantasyData.nfl.timeFrames = function(timeFrameType, callback){
+    var uri = buildNflUrl('TimeFrames/{{timeFrameType}}', {timeFrameType:timeFrameType});
+
+    makeRequest(uri, callback);
+  };
+
+  FantasyData.nfl.upcomingSeason = function(callback){
+    var uri = buildNflUrl('UpcomingSeason');
+
+    makeRequest(uri, callback);
+  };
+
+  FantasyData.nfl.upcomingWeek = function(callback){
+    var uri = buildNflUrl('UpcomingWeek');
 
     makeRequest(uri, callback);
   };
@@ -336,25 +581,17 @@ module.exports = function(options){
       isValid = false;
     }
 
-    var validLevels = [
+    var validVersions = [
       "trial",
       "developer",
       "standard",
       "weekly",
-      "enterprise"
+      "enterprise",
+      "v2"
     ];
 
-    if(validLevels.indexOf(cfg.level.toLowerCase()) === -1){
-      console.error('The given level: ' + cfg.level + ' is not supported at this time. Value must be one of the following: ' + validLevels.join(','));
-      isValid = false;
-    }
-
-    var validProtocols = [
-      "http"
-    ];
-
-    if(validProtocols.indexOf(cfg.protocol.toLowerCase()) === -1){
-      console.error('The given protocol: ' + cfg.protocol + ' is not supported at this time. Value must be one of the following: ' + validProtocols.join(','));
+    if(validVersions.indexOf(cfg.version.toLowerCase()) === -1){
+      console.error('The given version: ' + cfg.version + ' is not supported at this time. Value must be one of the following: ' + validVersions.join(','));
       isValid = false;
     }
 
@@ -387,7 +624,7 @@ module.exports = function(options){
         return callback(err, null);
       }
 
-      var data = results && results.statusCode === 200 ? results.body : null;
+      var data = results && results.statusCode === 200 ? results.body : { statusCode: results.statusCode || 500, message: results.body || 'An error response was returned.'};
 
       return callback(err, data);
     });
@@ -403,7 +640,19 @@ module.exports = function(options){
     };
   }
 
-  function buildUrl(path, urlParams, qsParams){
+  function buildNflUrl(path, urlParams, qsParams){
+    return buildUrl(path, urlParams, qsParams, 'nfl');
+  }
+
+  function buildMlbUrl(path, urlParams, qsParams){
+    return buildUrl(path, urlParams, qsParams, 'mlb');
+  }
+
+  function buildNbaUrl(path, urlParams, qsParams){
+    return buildUrl(path, urlParams, qsParams, 'nba');
+  }
+
+  function buildUrl(path, urlParams, qsParams, sportType){
     if(urlParams){
       _.each(_(urlParams).keys(),function(key){
         path = path.toLowerCase().split('{{'+key.toLowerCase()+'}}').join(urlParams[key]);
@@ -413,8 +662,8 @@ module.exports = function(options){
     var address = url.format({
       protocol: config.protocol,
       host: config.url,
-      pathname: [ config.level, config.format, path ].join('/'),
-      query: _.extend(qsParams || {}, { key: config.key })
+      pathname: [ config[sportType].version, 'json', path ].join('/'),
+      query: _.extend(qsParams || {}, { key: config[sportType].key })
     });
 
     return address;
