@@ -586,7 +586,8 @@ describe('FantasyData', function(){
       });
     });
     describe('.boxScores(season, week)', function(){
-      it.skip('Results should return an array', function(done){
+      it('Results should return an array', function(done){
+        this.timeout(15*1000);
         FantasyData.nfl.boxScores(season, week, function(err, results){
           if(err){
             done(err);
@@ -694,8 +695,8 @@ describe('FantasyData', function(){
       });
     });
     describe('.freeAgents()', function(){
-      it.skip('Results should return an array', function(done){
-        this.timeout(15 * 1000); // Set the timeout for this specific test to 15s because it is longer call
+      it('Results should return an array', function(done){
+        this.timeout(20 * 1000); // Set the timeout for this specific test to 15s because it is longer call
         FantasyData.nfl.freeAgents(function(err, results){
           if(err){
             done(err);
@@ -911,7 +912,8 @@ describe('FantasyData', function(){
       });
     });
     describe('.playerGameStatsByWeek(season, week)', function(){
-      it.skip('Results should return an array', function(done){
+      it('Results should return an array', function(done){
+        this.timeout(15*1000);
         FantasyData.nfl.playerGameStatsByWeek(season, week, function(err, results){
           if(err){
             done(err);

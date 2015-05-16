@@ -5,31 +5,24 @@ var url = require('url');
 
 module.exports = function(options){
   var defaults = {
+    timeoout: 15000,
     nba: {
-      protocol: 'http',
       version: 'nba/v2',
-      timeout: 10000,
       key: ''
     },
     nfl: {
-      protocol: 'http',
       version: 'trial',
-      timeout: 10000,
       key: ''
     },
     mlb: {
-      protocol: 'http',
       version: 'mlb/v2',
-      timeout: 10000,
       key: ''
     }
   };
 
   options = options || {};
   options.url = 'api.nfldata.apiphany.com';
-  options.nba.format = 'json';
-  options.nfl.format = 'json';
-  options.mlb.format = 'json';
+  options.protocol = 'http';
 
   var config = _.extend(defaults, options);
 
@@ -602,15 +595,6 @@ module.exports = function(options){
       isValid = false;
     }
 
-    var validProtocols = [
-      "http"
-    ];
-
-    if(validProtocols.indexOf(cfg.protocol.toLowerCase()) === -1){
-      console.error('The given protocol: ' + cfg.protocol + ' is not supported at this time. Value must be one of the following: ' + validProtocols.join(','));
-      isValid = false;
-    }
-
     var validUrls = [
       "api.nfldata.apiphany.com"
     ];
@@ -676,13 +660,11 @@ module.exports = function(options){
     }
 
     var address = url.format({
-      protocol: config[sportType].protocol,
+      protocol: config.protocol,
       host: config.url,
-      pathname: [ config[sportType].version, config[sportType].format, path ].join('/'),
+      pathname: [ config[sportType].version, 'json', path ].join('/'),
       query: _.extend(qsParams || {}, { key: config[sportType].key })
     });
-
-    console.log('\t%s',address);
 
     return address;
   }

@@ -7,46 +7,31 @@ v1.2.1 [![Build Status](https://drone.io/github.com/n8io/fantasydata-api/status.
 [![NPM](https://nodei.co/npm/fantasydata-api.png?downloads=true&stars=true)](http://bit.ly/npm-downloads-img)
 
 ##Intro
-This wrapper provides a simple way of interacting with the exposed methods of FantasyData's api. It can be used both on the client(1) and the server. Both are generated from the same code base and are validated via the same mocha tests.
-
-(1) Please note that most modern browsers will not allow cross
-origin requests, so unfortunately the client library will not
-function as expected in these cases. There is currently [an open issue](http://bit.ly/fantasydata-issues-104)
-regarding this restriction.
+This wrapper provides a simple way of interacting with the exposed methods of FantasyData's various sports apis. Includes methods for MLB, NBA, and NFL.
 
 ##Installation
-###Server
 This can easily be installed via npm
 
 ```
 npm install fantasydata-api
-```
-###Client
-```html
-<script src="./client/fantasydata-api.js"></script>
 ```
 
 ##Options
 
 ```javascript
 var options = {
-  nfl: {
-    protocol: 'http',
-    version: 'trial',
-    timeout: 10000,
-    key: '' // <-- Pass in your nfl key here
+  timeout: 15000, // Service call timeout
+  mlb: {
+    version: 'mlb/v2',
+    key: '' // <-- Pass in your mlb key here
   },
   nba: {
-    protocol: 'http',
     version: 'nba/v2',
-    timeout: 10000,
     key: '' // <-- Pass in your nba key here
   },
-  mlb: {
-    protocol: 'http',
-    version: 'mlb/v2',
-    timeout: 10000,
-    key: '' // <-- Pass in your mlb key here
+  nfl: {
+    version: 'trial',
+    key: '' // <-- Pass in your nfl key here
   }
 };
 ```
@@ -114,56 +99,55 @@ For more information as to what each method returns, take a look at the [officia
 ###API
 All methods are asynchronous and require the last parameter to be a callback function ```function(err, results) {}```.
 
-#### FantasyData.nfl.<method>
-
-* ```activeBoxScores(callback)```
-* ```areAnyGamesInProgress(callback)```
-* ```boxScore(season, week, homeTeam, callback)```
-* ```boxScores(season, week, callback)```
-* ```byes(season)(callback)```
-* ```currentSeason(callback)```
-* ```currentWeek(callback)```
-* ```fantasyDefenseByGame(season, week, callback)```
-* ```fantasyDefenseBySeason(season, callback)```
-* ```fantasyDefenseProjectionsByGame(season, week, callback)```
-* ```fantasyPlayers(callback)```
-* ```finalBoxScores(callback)```
-* ```freeAgents(callback)```
-* ```gameLeagueLeaders(season, week, position, statColumn, callback)```
-* ```gameStats(season, callback)```
-* ```gameStatsByWeek(season, week, callback)```
-* ```getErrorSample(callback)```
-* ```injuriesByTeam(season, week, team, callback)```
-* ```injuriesByWeek(season, week, callback)```
-* ```lastCompletedSeason(callback)```
-* ```lastCompletedWeek(callback)```
-* ```liveBoxScores(callback)```
-* ```matchPlayer(searchCriteria, callback)```
-* ```news(callback)```
-* ```newsByPlayerId(playerId, callback)```
-* ```newsByTeam(team, callback)```
-* ```player(playerId, callback)```
-* ```playerGameProjectionStatsByTeam(season, week, team, callback)```
-* ```playerGameStatsByPlayerId(season, week, playerId, callback)```
-* ```playerGameStatsByTeam(season, week, team, callback)```
-* ```playerGameStatsByWeek(season, week, callback)```
-* ```playerSeasonStatsByPlayerId(season, playerId, callback)```
-* ```playerSeasonStatsByTeam(season, team, callback)```
-* ```recentlyUpdatedBoxScores(minutes, callback)```
-* ```schedules(season, callback)```
-* ```scores(season,callback)```
-* ```scoresByWeek(season, week, callback)```
-* ```seasonLeagueLeaders(season, position, statColumn, callback)```
-* ```stadiums(callback)```
-* ```standings(season, callback)```
-* ```teamGameStats(season, week, callback)```
-* ```teamRoster(team, callback)```
-* ```teamSeasonStats(season, callback)```
-* ```teams(callback)```
-* ```teamsBySeason(season, callback)```
-* ```timeframes(timeFrameType, callback)```
-* ```upcomingSeason(callback)```
-* ```upcomingWeek(callback)```
+* FantasyData.nfl.
+  * ```activeBoxScores(callback)```
+  * ```areAnyGamesInProgress(callback)```
+  * ```boxScore(season, week, homeTeam, callback)```
+  * ```boxScores(season, week, callback)```
+  * ```byes(season)(callback)```
+  * ```currentSeason(callback)```
+  * ```currentWeek(callback)```
+  * ```fantasyDefenseByGame(season, week, callback)```
+  * ```fantasyDefenseBySeason(season, callback)```
+  * ```fantasyDefenseProjectionsByGame(season, week, callback)```
+  * ```fantasyPlayers(callback)```
+  * ```finalBoxScores(callback)```
+  * ```freeAgents(callback)```
+  * ```gameLeagueLeaders(season, week, position, statColumn, callback)```
+  * ```gameStats(season, callback)```
+  * ```gameStatsByWeek(season, week, callback)```
+  * ```getErrorSample(callback)```
+  * ```injuriesByTeam(season, week, team, callback)```
+  * ```injuriesByWeek(season, week, callback)```
+  * ```lastCompletedSeason(callback)```
+  * ```lastCompletedWeek(callback)```
+  * ```liveBoxScores(callback)```
+  * ```matchPlayer(searchCriteria, callback)```
+  * ```news(callback)```
+  * ```newsByPlayerId(playerId, callback)```
+  * ```newsByTeam(team, callback)```
+  * ```player(playerId, callback)```
+  * ```playerGameProjectionStatsByTeam(season, week, team, callback)```
+  * ```playerGameStatsByPlayerId(season, week, playerId, callback)```
+  * ```playerGameStatsByTeam(season, week, team, callback)```
+  * ```playerGameStatsByWeek(season, week, callback)```
+  * ```playerSeasonStatsByPlayerId(season, playerId, callback)```
+  * ```playerSeasonStatsByTeam(season, team, callback)```
+  * ```recentlyUpdatedBoxScores(minutes, callback)```
+  * ```schedules(season, callback)```
+  * ```scores(season,callback)```
+  * ```scoresByWeek(season, week, callback)```
+  * ```seasonLeagueLeaders(season, position, statColumn, callback)```
+  * ```stadiums(callback)```
+  * ```standings(season, callback)```
+  * ```teamGameStats(season, week, callback)```
+  * ```teamRoster(team, callback)```
+  * ```teamSeasonStats(season, callback)```
+  * ```teams(callback)```
+  * ```teamsBySeason(season, callback)```
+  * ```timeframes(timeFrameType, callback)```
+  * ```upcomingSeason(callback)```
+  * ```upcomingWeek(callback)```
 
 ___
 
