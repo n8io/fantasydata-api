@@ -1,4 +1,15 @@
 {
-  "key": "",
-  "timeout": 15000
+  "timeout": 15000,
+  "nfl": {
+    "key": "",
+    "version": "trial"
+  },
+  "mlb": {
+    "key": "",
+    "version": "mlb/v2"
+  },
+  "nba": {
+    "key": "",
+    "version": "nba/v2"
+  }
 }
