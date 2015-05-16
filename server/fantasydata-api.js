@@ -590,8 +590,8 @@ module.exports = function(options){
       "v2"
     ];
 
-    if(validLevels.indexOf(cfg.version.toLowerCase()) === -1){
-      console.error('The given version: ' + cfg.version + ' is not supported at this time. Value must be one of the following: ' + validLevels.join(','));
+    if(validVersions.indexOf(cfg.version.toLowerCase()) === -1){
+      console.error('The given version: ' + cfg.version + ' is not supported at this time. Value must be one of the following: ' + validVersions.join(','));
       isValid = false;
     }
 
