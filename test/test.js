@@ -3,6 +3,11 @@ var config = require('./config.json');
 if(process.env.NFL_API_KEY){
   config.nfl.key = process.env.NFL_API_KEY;
 }
+
+if(process.env.NBA_API_KEY){
+  config.mlb.key = process.env.MLB_API_KEY;
+}
+
 if(process.env.MLB_API_KEY){
   config.mlb.key = process.env.MLB_API_KEY;
 }
