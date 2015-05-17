@@ -12,6 +12,8 @@ if(process.env.MLB_API_KEY){
   config.mlb.key = process.env.MLB_API_KEY;
 }
 
+config.timeout = 60 * 1000;
+
 var FantasyData = require('../server/fantasydata-api')(config);
 var expect = require('expect.js')
 
@@ -592,7 +594,7 @@ describe('FantasyData', function(){
     });
     describe('.boxScores(season, week)', function(){
       it('Results should return an array', function(done){
-        this.timeout(15*1000);
+        this.timeout(0);
         FantasyData.nfl.boxScores(season, week, function(err, results){
           if(err){
             done(err);
@@ -701,7 +703,7 @@ describe('FantasyData', function(){
     });
     describe('.freeAgents()', function(){
       it('Results should return an array', function(done){
-        this.timeout(20 * 1000); // Set the timeout for this specific test to 15s because it is longer call
+        this.timeout(0);
         FantasyData.nfl.freeAgents(function(err, results){
           if(err){
             done(err);
@@ -918,7 +920,7 @@ describe('FantasyData', function(){
     });
     describe('.playerGameStatsByWeek(season, week)', function(){
       it('Results should return an array', function(done){
-        this.timeout(15*1000);
+        this.timeout(0);
         FantasyData.nfl.playerGameStatsByWeek(season, week, function(err, results){
           if(err){
             done(err);

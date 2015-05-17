@@ -620,7 +620,6 @@ module.exports = function(options){
   function makeRequest(uri, callback){
     request(getDefaultOptions(uri), function(err, results){
       if(err){
-        console.log(uri, err);
         return callback(err, null);
       }
 
