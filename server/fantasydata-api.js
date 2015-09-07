@@ -21,7 +21,7 @@ module.exports = function(options){
   };
 
   options = options || {};
-  options.url = 'api.nfldata.apiphany.com';
+  options.url = 'api.fantasydata.net';
   options.protocol = 'http';
 
   var config = _.extend(defaults, options);
