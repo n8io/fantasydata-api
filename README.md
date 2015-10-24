@@ -2,6 +2,9 @@
 
 This library is a wrapper for the [FantasyData.com](http://bit.ly/fantasydata)'s api. Fully tested using mocha.
 
+[![Build Status](https://drone.io/github.com/n8io/fantasydata-api/status.png)](https://drone.io/github.com/n8io/fantasydata-api/latest)
+#### v1.3.0
+
 [![NPM](https://nodei.co/npm/fantasydata-api.png?downloads=true&stars=true)](http://bit.ly/npm-downloads-img)
 
 ## Intro
@@ -30,6 +33,10 @@ var options = {
   nfl: {
     version: 'trial',
     key: '' // <-- Pass in your nfl key here
+  },
+  nhl: {
+    version: 'trial',
+    key: '' // <-- Pass in your nhl key here
   }
 };
 ```
@@ -169,6 +176,27 @@ All methods are asynchronous and require the last parameter to be a callback fun
   * ```.teamSeasonStats(callback)```
 
 * FantastyData.mlb
+  * ```.activeTeams(callback)```
+  * ```.activePlayers(callback)```
+  * ```.boxScore(gameId, callback)```
+  * ```.boxScores(dateStr, callback)```
+  * ```.boxScoresDelta(dateStr, minutesBack, callback)```
+  * ```.freeAgents(callback)```
+  * ```.gamesByDate(dateStr, callback)```
+  * ```.gamesBySeason(season, callback)```
+  * ```.news(callback)```
+  * ```.newsByDate(dateStr, callback)```
+  * ```.newsByPlayerId(playerId, callback)```
+  * ```.playerGameStatsByDate(dateStr, callback)```
+  * ```.playerSeasonStats(season, callback)```
+  * ```.playerSeasonStatsByTeam(season, team, callback)```
+  * ```.playersByTeam(team, callback)```
+  * ```.playerGameProjectionStatsByDate(dateStr, callback)```
+  * ```.stadiums(callback)```
+  * ```.teamGameStatsByDate(dateStr, callback)```
+  * ```.teamSeasonStats(callback)```
+
+* FantastyData.nhl
   * ```.activeTeams(callback)```
   * ```.activePlayers(callback)```
   * ```.boxScore(gameId, callback)```

@@ -1,15 +1,19 @@
 var config = require('./config.json');
 
-if(process.env.NFL_API_KEY){
+if(process.env.NFL_API_KEY) {
   config.nfl.key = process.env.NFL_API_KEY;
 }
 
-if(process.env.NBA_API_KEY){
+if(process.env.NBA_API_KEY) {
   config.nba.key = process.env.NBA_API_KEY;
 }
 
-if(process.env.MLB_API_KEY){
+if(process.env.MLB_API_KEY) {
   config.mlb.key = process.env.MLB_API_KEY;
+}
+
+if(process.env.NHL_API_KEY) {
+  config.nhl.key = process.env.NHL_API_KEY;
 }
 
 config.timeout = 60 * 1000;
@@ -17,8 +21,283 @@ config.timeout = 60 * 1000;
 var FantasyData = require('../server/fantasydata-api')(config);
 var expect = require('expect.js')
 
-describe('FantasyData', function(){
-  describe('.mlb', function(){
+describe('FantasyData', function() {
+  describe('.nhl', function() {
+    var game = 16905;
+    var gameDate = '2015-MAY-15';
+    var minutes = 1;
+    var season = 2015;
+    var playerId = 30000058;
+    var team = 'BOS';
+
+    describe('.activeTeams()', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.nhl.activeTeams(function(err, results) {
+          if(err) {
+            return done(err);
+          }
+
+          expect(results).to.be.an('array');
+
+          return done();
+        });
+      });
+    });
+
+    describe('.activePlayers()', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.nhl.activePlayers(function(err, results) {
+          if(err) {
+            return done(err);
+          }
+
+          expect(results).to.be.an('array');
+
+          return done();
+        });
+      });
+    });
+
+    describe('.boxScore()', function() {
+      it('Results should return an object', function(done) {
+        FantasyData.nhl.boxScore(game, function(err, results) {
+          if(err) {
+            return done(err);
+          }
+
+          expect(results).to.be.an('object');
+
+          return done();
+        });
+      });
+    });
+
+    describe('.boxScores()', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.nhl.boxScores(gameDate, function(err, results) {
+          if(err) {
+            return done(err);
+          }
+
+          expect(results).to.be.an('array');
+
+          return done();
+        });
+      });
+    });
+
+    describe('.boxScoresDelta()', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.nhl.boxScoresDelta(gameDate, minutes, function(err, results) {
+          if(err) {
+            return done(err);
+          }
+
+          expect(results).to.be.an('array');
+
+          return done();
+        });
+      });
+    });
+
+    describe('.freeAgents()', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.nhl.freeAgents(function(err, results) {
+          if(err) {
+            return done(err);
+          }
+
+          expect(results).to.be.an('array');
+
+          return done();
+        });
+      });
+    });
+
+    describe('.gamesByDate()', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.nhl.gamesByDate(gameDate, function(err, results) {
+          if(err) {
+            return done(err);
+          }
+
+          expect(results).to.be.an('array');
+
+          return done();
+        });
+      });
+    });
+
+    describe('.gamesBySeason()', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.nhl.gamesBySeason(season, function(err, results) {
+          if(err) {
+            return done(err);
+          }
+
+          expect(results).to.be.an('array');
+
+          return done();
+        });
+      });
+    });
+
+    describe('.news()', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.nhl.news(function(err, results) {
+          if(err) {
+            return done(err);
+          }
+
+          expect(results).to.be.an('array');
+
+          return done();
+        });
+      });
+    });
+
+    describe('.newsByDate()', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.nhl.newsByDate(gameDate, function(err, results) {
+          if(err) {
+            return done(err);
+          }
+
+          expect(results).to.be.an('array');
+
+          return done();
+        });
+      });
+    });
+
+    describe('.newsByPlayerId()', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.nhl.newsByPlayerId(playerId, function(err, results) {
+          if(err) {
+            return done(err);
+          }
+
+          expect(results).to.be.an('array');
+
+          return done();
+        });
+      });
+    });
+
+    describe('.playerGameStatsByDate()', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.nhl.playerGameStatsByDate(gameDate, function(err, results) {
+          if(err) {
+            return done(err);
+          }
+
+          expect(results).to.be.an('array');
+
+          return done();
+        });
+      });
+    });
+
+    describe('.playerSeasonStats()', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.nhl.playerSeasonStats(season, function(err, results) {
+          if(err) {
+            return done(err);
+          }
+
+          expect(results).to.be.an('array');
+
+          return done();
+        });
+      });
+    });
+
+    describe('.playerSeasonStatsByTeam()', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.nhl.playerSeasonStatsByTeam(season, team, function(err, results) {
+          if(err) {
+            return done(err);
+          }
+
+          expect(results).to.be.an('array');
+
+          return done();
+        });
+      });
+    });
+
+    describe('.playersByTeam()', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.nhl.playersByTeam(team, function(err, results) {
+          if(err) {
+            return done(err);
+          }
+
+          expect(results).to.be.an('array');
+
+          return done();
+        });
+      });
+    });
+
+    describe('.playerGameProjectionStatsByDate()', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.nhl.playerGameProjectionStatsByDate(gameDate, function(err, results) {
+          if(err) {
+            return done(err);
+          }
+
+          expect(results).to.be.an('array');
+
+          return done();
+        });
+      });
+    });
+
+    describe('.stadiums()', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.nhl.stadiums(function(err, results) {
+          if(err) {
+            return done(err);
+          }
+
+          expect(results).to.be.an('array');
+
+          return done();
+        });
+      });
+    });
+
+    describe('.teamGameStatsByDate()', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.nhl.teamGameStatsByDate(gameDate, function(err, results) {
+          if(err) {
+            return done(err);
+          }
+
+          expect(results).to.be.an('array');
+
+          return done();
+        });
+      });
+    });
+
+    describe('.teamSeasonStats()', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.nhl.teamSeasonStats(season, function(err, results) {
+          if(err) {
+            return done(err);
+          }
+
+          expect(results).to.be.an('array');
+
+          return done();
+        });
+      });
+    });
+  });
+
+  describe('.mlb', function() {
     var game = 16905;
     var gameDate = '2015-MAY-15';
     var minutes = 1;
@@ -26,255 +305,274 @@ describe('FantasyData', function(){
     var playerId = 10000507;
     var team = 'NYY';
 
-    describe('.activeTeams()', function(){
-      it('Results should return an array', function(done){
-        FantasyData.mlb.activeTeams(function(err, results){
-          if(err){
+    describe('.activeTeams()', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.mlb.activeTeams(function(err, results) {
+          if(err) {
             return done(err);
           }
 
           expect(results).to.be.an('array');
+
           return done();
         });
       });
     });
 
-    describe('.activePlayers()', function(){
-      it('Results should return an array', function(done){
-        FantasyData.mlb.activePlayers(function(err, results){
-          if(err){
+    describe('.activePlayers()', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.mlb.activePlayers(function(err, results) {
+          if(err) {
             return done(err);
           }
 
           expect(results).to.be.an('array');
+
           return done();
         });
       });
     });
 
-    describe('.boxScore()', function(){
-      it('Results should return an object', function(done){
-        FantasyData.mlb.boxScore(game, function(err, results){
-          if(err){
+    describe('.boxScore()', function() {
+      it('Results should return an object', function(done) {
+        FantasyData.mlb.boxScore(game, function(err, results) {
+          if(err) {
             return done(err);
           }
 
           expect(results).to.be.an('object');
+
           return done();
         });
       });
     });
 
-    describe('.boxScores()', function(){
-      it('Results should return an array', function(done){
-        FantasyData.mlb.boxScores(gameDate, function(err, results){
-          if(err){
+    describe('.boxScores()', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.mlb.boxScores(gameDate, function(err, results) {
+          if(err) {
             return done(err);
           }
 
           expect(results).to.be.an('array');
+
           return done();
         });
       });
     });
 
-    describe('.boxScoresDelta()', function(){
-      it('Results should return an array', function(done){
-        FantasyData.mlb.boxScoresDelta(gameDate, minutes, function(err, results){
-          if(err){
+    describe('.boxScoresDelta()', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.mlb.boxScoresDelta(gameDate, minutes, function(err, results) {
+          if(err) {
             return done(err);
           }
 
           expect(results).to.be.an('array');
+
           return done();
         });
       });
     });
 
-    describe('.freeAgents()', function(){
-      it('Results should return an array', function(done){
-        FantasyData.mlb.freeAgents(function(err, results){
-          if(err){
+    describe('.freeAgents()', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.mlb.freeAgents(function(err, results) {
+          if(err) {
             return done(err);
           }
 
           expect(results).to.be.an('array');
+
           return done();
         });
       });
     });
 
-    describe('.gamesByDate()', function(){
-      it('Results should return an array', function(done){
-        FantasyData.mlb.gamesByDate(gameDate, function(err, results){
-          if(err){
+    describe('.gamesByDate()', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.mlb.gamesByDate(gameDate, function(err, results) {
+          if(err) {
             return done(err);
           }
 
           expect(results).to.be.an('array');
+
           return done();
         });
       });
     });
 
-    describe('.gamesBySeason()', function(){
-      it('Results should return an array', function(done){
-        FantasyData.mlb.gamesBySeason(season, function(err, results){
-          if(err){
+    describe('.gamesBySeason()', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.mlb.gamesBySeason(season, function(err, results) {
+          if(err) {
             return done(err);
           }
 
           expect(results).to.be.an('array');
+
           return done();
         });
       });
     });
 
-    describe('.news()', function(){
-      it('Results should return an array', function(done){
-        FantasyData.mlb.news(function(err, results){
-          if(err){
+    describe('.news()', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.mlb.news(function(err, results) {
+          if(err) {
             return done(err);
           }
 
           expect(results).to.be.an('array');
+
           return done();
         });
       });
     });
 
-    describe('.newsByDate()', function(){
-      it('Results should return an array', function(done){
-        FantasyData.mlb.newsByDate(gameDate, function(err, results){
-          if(err){
+    describe('.newsByDate()', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.mlb.newsByDate(gameDate, function(err, results) {
+          if(err) {
             return done(err);
           }
 
           expect(results).to.be.an('array');
+
           return done();
         });
       });
     });
 
-    describe('.newsByPlayerId()', function(){
-      it('Results should return an array', function(done){
-        FantasyData.mlb.newsByPlayerId(playerId, function(err, results){
-          if(err){
+    describe('.newsByPlayerId()', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.mlb.newsByPlayerId(playerId, function(err, results) {
+          if(err) {
             return done(err);
           }
 
           expect(results).to.be.an('array');
+
           return done();
         });
       });
     });
 
-    describe('.playerGameStatsByDate()', function(){
-      it('Results should return an array', function(done){
-        FantasyData.mlb.playerGameStatsByDate(gameDate, function(err, results){
-          if(err){
+    describe('.playerGameStatsByDate()', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.mlb.playerGameStatsByDate(gameDate, function(err, results) {
+          if(err) {
             return done(err);
           }
 
           expect(results).to.be.an('array');
+
           return done();
         });
       });
     });
 
-    describe('.playerSeasonStats()', function(){
-      it('Results should return an array', function(done){
-        FantasyData.mlb.playerSeasonStats(season, function(err, results){
-          if(err){
+    describe('.playerSeasonStats()', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.mlb.playerSeasonStats(season, function(err, results) {
+          if(err) {
             return done(err);
           }
 
           expect(results).to.be.an('array');
+
           return done();
         });
       });
     });
 
-    describe('.playerSeasonStatsByTeam()', function(){
-      it('Results should return an array', function(done){
-        FantasyData.mlb.playerSeasonStatsByTeam(season, team, function(err, results){
-          if(err){
+    describe('.playerSeasonStatsByTeam()', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.mlb.playerSeasonStatsByTeam(season, team, function(err, results) {
+          if(err) {
             return done(err);
           }
 
           expect(results).to.be.an('array');
+
           return done();
         });
       });
     });
 
-    describe('.playersByTeam()', function(){
-      it('Results should return an array', function(done){
-        FantasyData.mlb.playersByTeam(team, function(err, results){
-          if(err){
+    describe('.playersByTeam()', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.mlb.playersByTeam(team, function(err, results) {
+          if(err) {
             return done(err);
           }
 
           expect(results).to.be.an('array');
+
           return done();
         });
       });
     });
 
-    describe('.playerGameProjectionStatsByDate()', function(){
-      it('Results should return an array', function(done){
-        FantasyData.mlb.playerGameProjectionStatsByDate(gameDate, function(err, results){
-          if(err){
+    describe('.playerGameProjectionStatsByDate()', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.mlb.playerGameProjectionStatsByDate(gameDate, function(err, results) {
+          if(err) {
             return done(err);
           }
 
           expect(results).to.be.an('array');
+
           return done();
         });
       });
     });
 
-    describe('.stadiums()', function(){
-      it('Results should return an array', function(done){
-        FantasyData.mlb.stadiums(function(err, results){
-          if(err){
+    describe('.stadiums()', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.mlb.stadiums(function(err, results) {
+          if(err) {
             return done(err);
           }
 
           expect(results).to.be.an('array');
+
           return done();
         });
       });
     });
 
-    describe('.teamGameStatsByDate()', function(){
-      it('Results should return an array', function(done){
-        FantasyData.mlb.teamGameStatsByDate(gameDate, function(err, results){
-          if(err){
+    describe('.teamGameStatsByDate()', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.mlb.teamGameStatsByDate(gameDate, function(err, results) {
+          if(err) {
             return done(err);
           }
 
           expect(results).to.be.an('array');
+
           return done();
         });
       });
     });
 
-    describe('.teamSeasonStats()', function(){
-      it('Results should return an array', function(done){
-        FantasyData.mlb.teamSeasonStats(season, function(err, results){
-          if(err){
+    describe('.teamSeasonStats()', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.mlb.teamSeasonStats(season, function(err, results) {
+          if(err) {
             return done(err);
           }
 
           expect(results).to.be.an('array');
+
           return done();
         });
       });
     });
   });
 
-  describe('.nba', function(){
+  describe('.nba', function() {
     var game = 56;
     var gameDate = '2015-MAY-15';
     var minutes = 1;
@@ -282,255 +580,274 @@ describe('FantasyData', function(){
     var playerId = 10000507;
     var team = 'CLE';
 
-    describe('.activeTeams()', function(){
-      it('Results should return an array', function(done){
-        FantasyData.nba.activeTeams(function(err, results){
-          if(err){
+    describe('.activeTeams()', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.nba.activeTeams(function(err, results) {
+          if(err) {
             return done(err);
           }
 
           expect(results).to.be.an('array');
+
           return done();
         });
       });
     });
 
-    describe('.activePlayers()', function(){
-      it('Results should return an array', function(done){
-        FantasyData.nba.activePlayers(function(err, results){
-          if(err){
+    describe('.activePlayers()', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.nba.activePlayers(function(err, results) {
+          if(err) {
             return done(err);
           }
 
           expect(results).to.be.an('array');
+
           return done();
         });
       });
     });
 
-    describe('.boxScore()', function(){
-      it('Results should return an object', function(done){
-        FantasyData.nba.boxScore(game, function(err, results){
-          if(err){
+    describe('.boxScore()', function() {
+      it('Results should return an object', function(done) {
+        FantasyData.nba.boxScore(game, function(err, results) {
+          if(err) {
             return done(err);
           }
 
           expect(results).to.be.an('object');
+
           return done();
         });
       });
     });
 
-    describe('.boxScores()', function(){
-      it('Results should return an array', function(done){
-        FantasyData.nba.boxScores(gameDate, function(err, results){
-          if(err){
+    describe('.boxScores()', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.nba.boxScores(gameDate, function(err, results) {
+          if(err) {
             return done(err);
           }
 
           expect(results).to.be.an('array');
+
           return done();
         });
       });
     });
 
-    describe('.boxScoresDelta()', function(){
-      it('Results should return an array', function(done){
-        FantasyData.nba.boxScoresDelta(gameDate, minutes, function(err, results){
-          if(err){
+    describe('.boxScoresDelta()', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.nba.boxScoresDelta(gameDate, minutes, function(err, results) {
+          if(err) {
             return done(err);
           }
 
           expect(results).to.be.an('array');
+
           return done();
         });
       });
     });
 
-    describe('.freeAgents()', function(){
-      it('Results should return an array', function(done){
-        FantasyData.nba.freeAgents(function(err, results){
-          if(err){
+    describe('.freeAgents()', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.nba.freeAgents(function(err, results) {
+          if(err) {
             return done(err);
           }
 
           expect(results).to.be.an('array');
+
           return done();
         });
       });
     });
 
-    describe('.gamesByDate()', function(){
-      it('Results should return an array', function(done){
-        FantasyData.nba.gamesByDate(gameDate, function(err, results){
-          if(err){
+    describe('.gamesByDate()', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.nba.gamesByDate(gameDate, function(err, results) {
+          if(err) {
             return done(err);
           }
 
           expect(results).to.be.an('array');
+
           return done();
         });
       });
     });
 
-    describe('.gamesBySeason()', function(){
-      it('Results should return an array', function(done){
-        FantasyData.nba.gamesBySeason(season, function(err, results){
-          if(err){
+    describe('.gamesBySeason()', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.nba.gamesBySeason(season, function(err, results) {
+          if(err) {
             return done(err);
           }
 
           expect(results).to.be.an('array');
+
           return done();
         });
       });
     });
 
-    describe('.news()', function(){
-      it('Results should return an array', function(done){
-        FantasyData.nba.news(function(err, results){
-          if(err){
+    describe('.news()', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.nba.news(function(err, results) {
+          if(err) {
             return done(err);
           }
 
           expect(results).to.be.an('array');
+
           return done();
         });
       });
     });
 
-    describe('.newsByDate()', function(){
-      it('Results should return an array', function(done){
-        FantasyData.nba.newsByDate(gameDate, function(err, results){
-          if(err){
+    describe('.newsByDate()', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.nba.newsByDate(gameDate, function(err, results) {
+          if(err) {
             return done(err);
           }
 
           expect(results).to.be.an('array');
+
           return done();
         });
       });
     });
 
-    describe('.newsByPlayerId()', function(){
-      it('Results should return an array', function(done){
-        FantasyData.nba.newsByPlayerId(playerId, function(err, results){
-          if(err){
+    describe('.newsByPlayerId()', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.nba.newsByPlayerId(playerId, function(err, results) {
+          if(err) {
             return done(err);
           }
 
           expect(results).to.be.an('array');
+
           return done();
         });
       });
     });
 
-    describe('.playerGameStatsByDate()', function(){
-      it('Results should return an array', function(done){
-        FantasyData.nba.playerGameStatsByDate(gameDate, function(err, results){
-          if(err){
+    describe('.playerGameStatsByDate()', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.nba.playerGameStatsByDate(gameDate, function(err, results) {
+          if(err) {
             return done(err);
           }
 
           expect(results).to.be.an('array');
+
           return done();
         });
       });
     });
 
-    describe('.playerSeasonStats()', function(){
-      it('Results should return an array', function(done){
-        FantasyData.nba.playerSeasonStats(season, function(err, results){
-          if(err){
+    describe('.playerSeasonStats()', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.nba.playerSeasonStats(season, function(err, results) {
+          if(err) {
             return done(err);
           }
 
           expect(results).to.be.an('array');
+
           return done();
         });
       });
     });
 
-    describe('.playerSeasonStatsByTeam()', function(){
-      it('Results should return an array', function(done){
-        FantasyData.nba.playerSeasonStatsByTeam(season, team, function(err, results){
-          if(err){
+    describe('.playerSeasonStatsByTeam()', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.nba.playerSeasonStatsByTeam(season, team, function(err, results) {
+          if(err) {
             return done(err);
           }
 
           expect(results).to.be.an('array');
+
           return done();
         });
       });
     });
 
-    describe('.playersByTeam()', function(){
-      it('Results should return an array', function(done){
-        FantasyData.nba.playersByTeam(team, function(err, results){
-          if(err){
+    describe('.playersByTeam()', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.nba.playersByTeam(team, function(err, results) {
+          if(err) {
             return done(err);
           }
 
           expect(results).to.be.an('array');
+
           return done();
         });
       });
     });
 
-    describe('.playerGameProjectionStatsByDate()', function(){
-      it('Results should return an array', function(done){
-        FantasyData.nba.playerGameProjectionStatsByDate(gameDate, function(err, results){
-          if(err){
+    describe('.playerGameProjectionStatsByDate()', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.nba.playerGameProjectionStatsByDate(gameDate, function(err, results) {
+          if(err) {
             return done(err);
           }
 
           expect(results).to.be.an('array');
+
           return done();
         });
       });
     });
 
-    describe('.stadiums()', function(){
-      it('Results should return an array', function(done){
-        FantasyData.nba.stadiums(function(err, results){
-          if(err){
+    describe('.stadiums()', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.nba.stadiums(function(err, results) {
+          if(err) {
             return done(err);
           }
 
           expect(results).to.be.an('array');
+
           return done();
         });
       });
     });
 
-    describe('.teamGameStatsByDate()', function(){
-      it('Results should return an array', function(done){
-        FantasyData.nba.teamGameStatsByDate(gameDate, function(err, results){
-          if(err){
+    describe('.teamGameStatsByDate()', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.nba.teamGameStatsByDate(gameDate, function(err, results) {
+          if(err) {
             return done(err);
           }
 
           expect(results).to.be.an('array');
+
           return done();
         });
       });
     });
 
-    describe('.teamSeasonStats()', function(){
-      it('Results should return an array', function(done){
-        FantasyData.nba.teamSeasonStats(season, function(err, results){
-          if(err){
+    describe('.teamSeasonStats()', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.nba.teamSeasonStats(season, function(err, results) {
+          if(err) {
             return done(err);
           }
 
           expect(results).to.be.an('array');
+
           return done();
         });
       });
     });
   });
 
-  describe('.nfl', function(){
+  describe('.nfl', function() {
     var season = process.env.SEASON || 2013;
     var week = 1;
     var team = 'IND';
@@ -556,22 +873,23 @@ describe('FantasyData', function(){
       college: null
     };
 
-    describe('.activeBoxScores()', function(){
-      it('Results should return an array', function(done){
-        FantasyData.nfl.activeBoxScores(function(err, results){
-          if(err){
+    describe('.activeBoxScores()', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.nfl.activeBoxScores(function(err, results) {
+          if(err) {
             return done(err);
           }
 
           expect(results).to.be.an('array');
+
           return done();
         });
       });
     });
-    describe('.areAnyGamesInProgress()', function(){
-      it('Results should return a boolean', function(done){
-        FantasyData.nfl.areAnyGamesInProgress(function(err, results){
-          if(err){
+    describe('.areAnyGamesInProgress()', function() {
+      it('Results should return a boolean', function(done) {
+        FantasyData.nfl.areAnyGamesInProgress(function(err, results) {
+          if(err) {
             done(err);
           }
 
@@ -580,10 +898,10 @@ describe('FantasyData', function(){
         });
       });
     });
-    describe('.boxScore(season, week, homeTeam)', function(){
-      it('Results should return an object', function(done){
-        FantasyData.nfl.boxScore(season, week, homeTeam, function(err, results){
-          if(err){
+    describe('.boxScore(season, week, homeTeam)', function() {
+      it('Results should return an object', function(done) {
+        FantasyData.nfl.boxScore(season, week, homeTeam, function(err, results) {
+          if(err) {
             done(err);
           }
 
@@ -592,11 +910,11 @@ describe('FantasyData', function(){
         });
       });
     });
-    describe('.boxScores(season, week)', function(){
-      it('Results should return an array', function(done){
+    describe('.boxScores(season, week)', function() {
+      it('Results should return an array', function(done) {
         this.timeout(0);
-        FantasyData.nfl.boxScores(season, week, function(err, results){
-          if(err){
+        FantasyData.nfl.boxScores(season, week, function(err, results) {
+          if(err) {
             done(err);
           }
 
@@ -605,10 +923,10 @@ describe('FantasyData', function(){
         });
       });
     });
-    describe('.byes(season)', function(){
-      it('Results should return an array', function(done){
-        FantasyData.nfl.byes(season, function(err, results){
-          if(err){
+    describe('.byes(season)', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.nfl.byes(season, function(err, results) {
+          if(err) {
             done(err);
           }
 
@@ -617,10 +935,10 @@ describe('FantasyData', function(){
         });
       });
     });
-    describe('.currentSeason()', function(){
-      it('Results should return a number', function(done){
-        FantasyData.nfl.currentSeason(function(err, results){
-          if(err){
+    describe('.currentSeason()', function() {
+      it('Results should return a number', function(done) {
+        FantasyData.nfl.currentSeason(function(err, results) {
+          if(err) {
             done(err);
           }
 
@@ -629,10 +947,10 @@ describe('FantasyData', function(){
         });
       });
     });
-    describe('.currentWeek()', function(){
-      it('Results should return a number', function(done){
-        FantasyData.nfl.currentWeek(function(err, results){
-          if(err){
+    describe('.currentWeek()', function() {
+      it('Results should return a number', function(done) {
+        FantasyData.nfl.currentWeek(function(err, results) {
+          if(err) {
             done(err);
           }
 
@@ -641,10 +959,10 @@ describe('FantasyData', function(){
         });
       });
     });
-    describe('.fantasyDefenseByGame(season, week)', function(){
-      it('Results should return an array', function(done){
-        FantasyData.nfl.fantasyDefenseByGame(season, week, function(err, results){
-          if(err){
+    describe('.fantasyDefenseByGame(season, week)', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.nfl.fantasyDefenseByGame(season, week, function(err, results) {
+          if(err) {
             done(err);
           }
 
@@ -653,10 +971,10 @@ describe('FantasyData', function(){
         });
       });
     });
-    describe('.fantasyDefenseBySeason(season)', function(){
-      it('Results should return an array', function(done){
-        FantasyData.nfl.fantasyDefenseBySeason(season, function(err, results){
-          if(err){
+    describe('.fantasyDefenseBySeason(season)', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.nfl.fantasyDefenseBySeason(season, function(err, results) {
+          if(err) {
             done(err);
           }
 
@@ -665,10 +983,10 @@ describe('FantasyData', function(){
         });
       });
     });
-    describe('.fantasyDefenseProjectionsByGame(season, week)', function(){
-      it('Results should return an array', function(done){
-        FantasyData.nfl.fantasyDefenseProjectionsByGame(season, week, function(err, results){
-          if(err){
+    describe('.fantasyDefenseProjectionsByGame(season, week)', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.nfl.fantasyDefenseProjectionsByGame(season, week, function(err, results) {
+          if(err) {
             done(err);
           }
 
@@ -677,10 +995,10 @@ describe('FantasyData', function(){
         });
       });
     });
-    describe('.fantasyPlayers()', function(){
-      it('Results should return an array', function(done){
-        FantasyData.nfl.fantasyPlayers(function(err, results){
-          if(err){
+    describe('.fantasyPlayers()', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.nfl.fantasyPlayers(function(err, results) {
+          if(err) {
             done(err);
           }
 
@@ -689,10 +1007,10 @@ describe('FantasyData', function(){
         });
       });
     });
-    describe('.finalBoxScores()', function(){
-      it('Results should return an array', function(done){
-        FantasyData.nfl.finalBoxScores(function(err, results){
-          if(err){
+    describe('.finalBoxScores()', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.nfl.finalBoxScores(function(err, results) {
+          if(err) {
             done(err);
           }
 
@@ -701,11 +1019,11 @@ describe('FantasyData', function(){
         });
       });
     });
-    describe('.freeAgents()', function(){
-      it('Results should return an array', function(done){
+    describe('.freeAgents()', function() {
+      it('Results should return an array', function(done) {
         this.timeout(0);
-        FantasyData.nfl.freeAgents(function(err, results){
-          if(err){
+        FantasyData.nfl.freeAgents(function(err, results) {
+          if(err) {
             done(err);
           }
 
@@ -714,10 +1032,10 @@ describe('FantasyData', function(){
         });
       });
     });
-    describe('.gameLeagueLeaders(season, week, position, statsColumn)', function(){
-      it('Results should return an array', function(done){
-        FantasyData.nfl.gameLeagueLeaders(season, week, player.position, statsColumn, function(err, results){
-          if(err){
+    describe('.gameLeagueLeaders(season, week, position, statsColumn)', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.nfl.gameLeagueLeaders(season, week, player.position, statsColumn, function(err, results) {
+          if(err) {
             done(err);
           }
 
@@ -726,10 +1044,10 @@ describe('FantasyData', function(){
         });
       });
     });
-    describe('.gameStats(season)', function(){
-      it('Results should return an array', function(done){
-        FantasyData.nfl.gameStats(season, function(err, results){
-          if(err){
+    describe('.gameStats(season)', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.nfl.gameStats(season, function(err, results) {
+          if(err) {
             done(err);
           }
 
@@ -738,10 +1056,10 @@ describe('FantasyData', function(){
         });
       });
     });
-    describe('.gameStatsByWeek(season, week)', function(){
-      it('Results should return an array', function(done){
-        FantasyData.nfl.gameStatsByWeek(season, week, function(err, results){
-          if(err){
+    describe('.gameStatsByWeek(season, week)', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.nfl.gameStatsByWeek(season, week, function(err, results) {
+          if(err) {
             done(err);
           }
 
@@ -750,10 +1068,10 @@ describe('FantasyData', function(){
         });
       });
     });
-    describe('.getErrorSample()', function(){
-      it.skip('Results should return an object', function(done){
-        FantasyData.nfl.getErrorSample(function(err, results){
-          if(err){
+    describe('.getErrorSample()', function() {
+      it.skip('Results should return an object', function(done) {
+        FantasyData.nfl.getErrorSample(function(err, results) {
+          if(err) {
             done(err);
           }
 
@@ -762,10 +1080,10 @@ describe('FantasyData', function(){
         });
       });
     });
-    describe('.injuriesByTeam(season, week, team)', function(){
-      it('Results should return an array', function(done){
-        FantasyData.nfl.injuriesByTeam(season, week, team, function(err, results){
-          if(err){
+    describe('.injuriesByTeam(season, week, team)', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.nfl.injuriesByTeam(season, week, team, function(err, results) {
+          if(err) {
             done(err);
           }
 
@@ -774,10 +1092,10 @@ describe('FantasyData', function(){
         });
       });
     });
-    describe('.injuriesByWeek(season, week)', function(){
-      it('Results should return an array', function(done){
-        FantasyData.nfl.injuriesByWeek(season, week, function(err, results){
-          if(err){
+    describe('.injuriesByWeek(season, week)', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.nfl.injuriesByWeek(season, week, function(err, results) {
+          if(err) {
             done(err);
           }
 
@@ -786,10 +1104,10 @@ describe('FantasyData', function(){
         });
       });
     });
-    describe('.lastCompletedSeason()', function(){
-      it('Results should return a number', function(done){
-        FantasyData.nfl.lastCompletedSeason(function(err, results){
-          if(err){
+    describe('.lastCompletedSeason()', function() {
+      it('Results should return a number', function(done) {
+        FantasyData.nfl.lastCompletedSeason(function(err, results) {
+          if(err) {
             done(err);
           }
 
@@ -798,10 +1116,10 @@ describe('FantasyData', function(){
         });
       });
     });
-    describe('.lastCompletedWeek()', function(){
-      it('Results should return a number', function(done){
-        FantasyData.nfl.lastCompletedWeek(function(err, results){
-          if(err){
+    describe('.lastCompletedWeek()', function() {
+      it('Results should return a number', function(done) {
+        FantasyData.nfl.lastCompletedWeek(function(err, results) {
+          if(err) {
             done(err);
           }
 
@@ -810,10 +1128,10 @@ describe('FantasyData', function(){
         });
       });
     });
-    describe('.liveBoxScores()', function(){
-      it('Results should return an array', function(done){
-        FantasyData.nfl.liveBoxScores(function(err, results){
-          if(err){
+    describe('.liveBoxScores()', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.nfl.liveBoxScores(function(err, results) {
+          if(err) {
             done(err);
           }
 
@@ -822,10 +1140,10 @@ describe('FantasyData', function(){
         });
       });
     });
-    describe('.matchPlayer(searchCriteria)', function(){
-      it('Results should return an object', function(done){
-        FantasyData.nfl.matchPlayer(searchCriteria, function(err, results){
-          if(err){
+    describe('.matchPlayer(searchCriteria)', function() {
+      it('Results should return an object', function(done) {
+        FantasyData.nfl.matchPlayer(searchCriteria, function(err, results) {
+          if(err) {
             done(err);
           }
 
@@ -834,10 +1152,10 @@ describe('FantasyData', function(){
         });
       });
     });
-    describe('.news()', function(){
-      it('Results should return an array', function(done){
-        FantasyData.nfl.news(function(err, results){
-          if(err){
+    describe('.news()', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.nfl.news(function(err, results) {
+          if(err) {
             done(err);
           }
 
@@ -846,10 +1164,10 @@ describe('FantasyData', function(){
         });
       });
     });
-    describe('.newsByPlayerId(playerId)', function(){
-      it('Results should return an array', function(done){
-        FantasyData.nfl.newsByPlayerId(player.id, function(err, results){
-          if(err){
+    describe('.newsByPlayerId(playerId)', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.nfl.newsByPlayerId(player.id, function(err, results) {
+          if(err) {
             done(err);
           }
 
@@ -858,10 +1176,10 @@ describe('FantasyData', function(){
         });
       });
     });
-    describe('.newsByTeam(team)', function(){
-      it('Results should return an array', function(done){
-        FantasyData.nfl.newsByTeam(team, function(err, results){
-          if(err){
+    describe('.newsByTeam(team)', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.nfl.newsByTeam(team, function(err, results) {
+          if(err) {
             done(err);
           }
 
@@ -870,10 +1188,10 @@ describe('FantasyData', function(){
         });
       });
     });
-    describe('.player(playerId)', function(){
-      it('Results should return an object', function(done){
-        FantasyData.nfl.player(player.id, function(err, results){
-          if(err){
+    describe('.player(playerId)', function() {
+      it('Results should return an object', function(done) {
+        FantasyData.nfl.player(player.id, function(err, results) {
+          if(err) {
             done(err);
           }
 
@@ -882,10 +1200,10 @@ describe('FantasyData', function(){
         });
       });
     });
-    describe('.playerGameProjectionStatsByTeam(season, week, team)', function(){
-      it('Results should return an array', function(done){
-        FantasyData.nfl.playerGameProjectionStatsByTeam(season, week, team, function(err, results){
-          if(err){
+    describe('.playerGameProjectionStatsByTeam(season, week, team)', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.nfl.playerGameProjectionStatsByTeam(season, week, team, function(err, results) {
+          if(err) {
             done(err);
           }
 
@@ -894,10 +1212,10 @@ describe('FantasyData', function(){
         });
       });
     });
-    describe('.playerGameStatsByPlayerId(season, week, playerId)', function(){
-      it('Results should return an object', function(done){
-        FantasyData.nfl.playerGameStatsByPlayerId(season, week, player.id, function(err, results){
-          if(err){
+    describe('.playerGameStatsByPlayerId(season, week, playerId)', function() {
+      it('Results should return an object', function(done) {
+        FantasyData.nfl.playerGameStatsByPlayerId(season, week, player.id, function(err, results) {
+          if(err) {
             done(err);
           }
 
@@ -906,10 +1224,10 @@ describe('FantasyData', function(){
         });
       });
     });
-    describe('.playerGameStatsByTeam(season, week, team)', function(){
-      it('Results should return an array', function(done){
-        FantasyData.nfl.playerGameStatsByTeam(season, week, team, function(err, results){
-          if(err){
+    describe('.playerGameStatsByTeam(season, week, team)', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.nfl.playerGameStatsByTeam(season, week, team, function(err, results) {
+          if(err) {
             done(err);
           }
 
@@ -918,11 +1236,11 @@ describe('FantasyData', function(){
         });
       });
     });
-    describe('.playerGameStatsByWeek(season, week)', function(){
-      it('Results should return an array', function(done){
+    describe('.playerGameStatsByWeek(season, week)', function() {
+      it('Results should return an array', function(done) {
         this.timeout(0);
-        FantasyData.nfl.playerGameStatsByWeek(season, week, function(err, results){
-          if(err){
+        FantasyData.nfl.playerGameStatsByWeek(season, week, function(err, results) {
+          if(err) {
             done(err);
           }
 
@@ -931,10 +1249,10 @@ describe('FantasyData', function(){
         });
       });
     });
-    describe('.playerSeasonStatsByPlayerId(season, playerId)', function(){
-      it('Results should return an array', function(done){
-        FantasyData.nfl.playerSeasonStatsByPlayerId(season, player.id, function(err, results){
-          if(err){
+    describe('.playerSeasonStatsByPlayerId(season, playerId)', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.nfl.playerSeasonStatsByPlayerId(season, player.id, function(err, results) {
+          if(err) {
             done(err);
           }
 
@@ -943,10 +1261,10 @@ describe('FantasyData', function(){
         });
       });
     });
-    describe('.playerSeasonStatsByTeam(season, team)', function(){
-      it('Results should return an array', function(done){
-        FantasyData.nfl.playerSeasonStatsByTeam(season, team, function(err, results){
-          if(err){
+    describe('.playerSeasonStatsByTeam(season, team)', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.nfl.playerSeasonStatsByTeam(season, team, function(err, results) {
+          if(err) {
             done(err);
           }
 
@@ -955,10 +1273,10 @@ describe('FantasyData', function(){
         });
       });
     });
-    describe('.recentlyUpdatedBoxScores(minutes)', function(){
-      it('Results should return an array', function(done){
-        FantasyData.nfl.recentlyUpdatedBoxScores(minutes, function(err, results){
-          if(err){
+    describe('.recentlyUpdatedBoxScores(minutes)', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.nfl.recentlyUpdatedBoxScores(minutes, function(err, results) {
+          if(err) {
             done(err);
           }
 
@@ -967,10 +1285,10 @@ describe('FantasyData', function(){
         });
       });
     });
-    describe('.schedules(season)', function(){
-      it('Results should return an array', function(done){
-        FantasyData.nfl.schedules(season, function(err, results){
-          if(err){
+    describe('.schedules(season)', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.nfl.schedules(season, function(err, results) {
+          if(err) {
             done(err);
           }
 
@@ -979,10 +1297,10 @@ describe('FantasyData', function(){
         });
       });
     });
-    describe('.scores(season)', function(){
-      it('Results should return an array', function(done){
-        FantasyData.nfl.scores(season, function(err, results){
-          if(err){
+    describe('.scores(season)', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.nfl.scores(season, function(err, results) {
+          if(err) {
             done(err);
           }
 
@@ -991,10 +1309,10 @@ describe('FantasyData', function(){
         });
       });
     });
-    describe('.scoresByWeek(season, week)', function(){
-      it('Results should return an array', function(done){
-        FantasyData.nfl.scoresByWeek(season, week, function(err, results){
-          if(err){
+    describe('.scoresByWeek(season, week)', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.nfl.scoresByWeek(season, week, function(err, results) {
+          if(err) {
             done(err);
           }
 
@@ -1003,10 +1321,10 @@ describe('FantasyData', function(){
         });
       });
     });
-    describe('.seasonLeagueLeaders(season, position, statsColumn)', function(){
-      it('Results should return an array', function(done){
-        FantasyData.nfl.seasonLeagueLeaders(season, player.position, statsColumn, function(err, results){
-          if(err){
+    describe('.seasonLeagueLeaders(season, position, statsColumn)', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.nfl.seasonLeagueLeaders(season, player.position, statsColumn, function(err, results) {
+          if(err) {
             done(err);
           }
 
@@ -1015,10 +1333,10 @@ describe('FantasyData', function(){
         });
       });
     });
-    describe('.stadiums()', function(){
-      it('Results should return an array', function(done){
-        FantasyData.nfl.stadiums(function(err, results){
-          if(err){
+    describe('.stadiums()', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.nfl.stadiums(function(err, results) {
+          if(err) {
             done(err);
           }
 
@@ -1027,10 +1345,10 @@ describe('FantasyData', function(){
         });
       });
     });
-    describe('.standings(season)', function(){
-      it('Results should return an array', function(done){
-        FantasyData.nfl.standings(season, function(err, results){
-          if(err){
+    describe('.standings(season)', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.nfl.standings(season, function(err, results) {
+          if(err) {
             done(err);
           }
 
@@ -1039,10 +1357,10 @@ describe('FantasyData', function(){
         });
       });
     });
-    describe('.teamGameStats(season, week)', function(){
-      it('Results should return an array', function(done){
-        FantasyData.nfl.teamGameStats(season, week, function(err, results){
-          if(err){
+    describe('.teamGameStats(season, week)', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.nfl.teamGameStats(season, week, function(err, results) {
+          if(err) {
             done(err);
           }
 
@@ -1051,10 +1369,10 @@ describe('FantasyData', function(){
         });
       });
     });
-    describe('.teamRoster(team)', function(){
-      it('Results should return an array', function(done){
-        FantasyData.nfl.teamRoster(team, function(err, results){
-          if(err){
+    describe('.teamRoster(team)', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.nfl.teamRoster(team, function(err, results) {
+          if(err) {
             done(err);
           }
 
@@ -1063,10 +1381,10 @@ describe('FantasyData', function(){
         });
       });
     });
-    describe('.teamSeasonStats(season)', function(){
-      it('Results should return an array', function(done){
-        FantasyData.nfl.teamSeasonStats(season, function(err, results){
-          if(err){
+    describe('.teamSeasonStats(season)', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.nfl.teamSeasonStats(season, function(err, results) {
+          if(err) {
             done(err);
           }
 
@@ -1075,10 +1393,10 @@ describe('FantasyData', function(){
         });
       });
     });
-    describe('.teams()', function(){
-      it('Results should return an array', function(done){
-        FantasyData.nfl.teams(function(err, results){
-          if(err){
+    describe('.teams()', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.nfl.teams(function(err, results) {
+          if(err) {
             done(err);
           }
 
@@ -1087,10 +1405,10 @@ describe('FantasyData', function(){
         });
       });
     });
-    describe('.teamsBySeason(season)', function(){
-      it('Results should return an array', function(done){
-        FantasyData.nfl.teamsBySeason(season, function(err, results){
-          if(err){
+    describe('.teamsBySeason(season)', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.nfl.teamsBySeason(season, function(err, results) {
+          if(err) {
             done(err);
           }
 
@@ -1099,10 +1417,10 @@ describe('FantasyData', function(){
         });
       });
     });
-    describe('.timeFrames(timeFrameType)', function(){
-      it('Results should return an array', function(done){
-        FantasyData.nfl.timeFrames(timeFrameType, function(err, results){
-          if(err){
+    describe('.timeFrames(timeFrameType)', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.nfl.timeFrames(timeFrameType, function(err, results) {
+          if(err) {
             done(err);
           }
 
@@ -1111,10 +1429,10 @@ describe('FantasyData', function(){
         });
       });
     });
-    describe('.upcomingSeason()', function(){
-      it('Results should return a number', function(done){
-        FantasyData.nfl.upcomingSeason(function(err, results){
-          if(err){
+    describe('.upcomingSeason()', function() {
+      it('Results should return a number', function(done) {
+        FantasyData.nfl.upcomingSeason(function(err, results) {
+          if(err) {
             done(err);
           }
 
@@ -1123,10 +1441,10 @@ describe('FantasyData', function(){
         });
       });
     });
-    describe('.upcomingWeek()', function(){
-      it('Results should return a number', function(done){
-        FantasyData.nfl.upcomingWeek(function(err, results){
-          if(err){
+    describe('.upcomingWeek()', function() {
+      it('Results should return a number', function(done) {
+        FantasyData.nfl.upcomingWeek(function(err, results) {
+          if(err) {
             done(err);
           }
 
