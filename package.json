@@ -1,6 +1,6 @@
 {
   "name": "fantasydata-api",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "This library is clean and tested wrapper for the FantasyData.com various sports api. Includes methods for mlb, nba, and nfl stats.",
   "main": "./server/fantasydata-api.js",
   "homepage": "https://github.com/n8io/fantasydata-api",
