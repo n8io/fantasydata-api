@@ -3,7 +3,10 @@
 This library is a wrapper for the [FantasyData.com](http://bit.ly/fantasydata)'s api. Fully tested using mocha.
 
 [![Build Status](https://drone.io/github.com/n8io/fantasydata-api/status.png)](https://drone.io/github.com/n8io/fantasydata-api/latest)
-#### v1.3.0
+[![Dependencies](https://david-dm.org/n8io/fantasydata-api.svg)](https://github.com/n8io/fantasydata-api/blob/master/package.json)
+[![Dev Dependencies](https://david-dm.org/dev/n8io/fantasydata-api.svg)](https://github.com/n8io/fantasydata-api/blob/master/package.json)
+
+#### v1.3.1
 
 [![NPM](https://nodei.co/npm/fantasydata-api.png?downloads=true&stars=true)](http://bit.ly/npm-downloads-img)
 
