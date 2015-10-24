@@ -4,17 +4,17 @@ This library is a wrapper for the [FantasyData.com](http://bit.ly/fantasydata)'s
 
 [![NPM](https://nodei.co/npm/fantasydata-api.png?downloads=true&stars=true)](http://bit.ly/npm-downloads-img)
 
-##Intro
+## Intro
 This wrapper provides a simple way of interacting with the exposed methods of FantasyData's various sports apis. Includes methods for MLB, NBA, and NFL.
 
-##Installation
+## Installation
 This can easily be installed via npm
 
 ```
 npm install fantasydata-api
 ```
 
-##Options
+## Options
 
 ```javascript
 var options = {
@@ -34,7 +34,7 @@ var options = {
 };
 ```
 
-##Example Usage
+## Example Usage
 ```javascript
 var fantasyData = require('fantasydata-api')(options);
 
@@ -44,7 +44,7 @@ fantasyData.nfl.Byes(season, function(err, results){
 });
 ```
 
-##Parameters
+## Parameters
 * ``` season ```
   * Year of the season and the season type. If no season type is provided, then the default is regular season.
   * e.g., 2013REG, 2013PRE, 2013POST, 2013, etc
@@ -86,15 +86,15 @@ fantasyData.nfl.Byes(season, function(err, results){
   };
   ```
 
-##Methods
+## Methods
 
 For more information as to what each method returns, take a look at the [official documentation](http://bit.ly/fantasydata-api-documentation).
 
-###Helpers
+### Helpers
 * ```Options()``` - Get the current options
 * ```Options(options)``` - Set the options
 
-###API
+### API
 All methods are asynchronous and require the last parameter to be a callback function ```function(err, results) {}```.
 
 * FantasyData.nfl
