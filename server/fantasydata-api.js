@@ -21,7 +21,7 @@ module.exports = function(options){
   };
 
   options = options || {};
-  options.url = 'api.nfldata.apiphany.com';
+  options.url = 'api.fantasydata.net';
   options.protocol = 'http';
 
   var config = _.extend(defaults, options);
@@ -618,9 +618,12 @@ module.exports = function(options){
   }
 
   function makeRequest(uri, callback){
+    if(config.debug){
+      console.log(uri);
+    }
+
     request(getDefaultOptions(uri), function(err, results){
       if(err){
-        console.log(uri, err);
         return callback(err, null);
       }
 
@@ -654,7 +657,7 @@ module.exports = function(options){
 
   function buildUrl(path, urlParams, qsParams, sportType){
     if(urlParams){
-      _.each(_(urlParams).keys(),function(key){
+      _.each(_.keys(urlParams),function(key){
         path = path.toLowerCase().split('{{'+key.toLowerCase()+'}}').join(urlParams[key]);
       });
     }

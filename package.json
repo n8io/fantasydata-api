@@ -9,7 +9,7 @@
     "url": "https://github.com/n8io/fantasydata-api.git"
   },
   "scripts": {
-    "test": "./node_modules/.bin/mocha ./test/test.js --timeout 15000"
+    "test": "./node_modules/.bin/mocha ./test/test.js -t 15000"
   },
   "keywords": [
     "FantasyData",

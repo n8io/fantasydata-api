@@ -1,4 +1,5 @@
 {
+  "debug": false,
   "timeout": 15000,
   "nfl": {
     "key": "",
