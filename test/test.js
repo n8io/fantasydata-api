@@ -1,4 +1,5 @@
 var config = require('./config.json');
+var expect = require('chai').expect;
 
 if(process.env.NFL_API_KEY) {
   config.nfl.key = process.env.NFL_API_KEY;
@@ -19,7 +20,6 @@ if(process.env.NHL_API_KEY) {
 config.timeout = 60 * 1000;
 
 var FantasyData = require('../server/fantasydata-api')(config);
-var expect = require('expect.js')
 
 describe('FantasyData', function() {
   describe('.nhl', function() {
