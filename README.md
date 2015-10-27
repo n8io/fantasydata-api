@@ -33,11 +33,11 @@ var options = {
     key: '' // <-- Pass in your nba key here
   },
   nfl: {
-    version: 'trial',
+    version: 'nfl/v2',
     key: '' // <-- Pass in your nfl key here
   },
   nhl: {
-    version: 'trial',
+    version: 'nhl/v2',
     key: '' // <-- Pass in your nhl key here
   }
 };
