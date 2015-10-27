@@ -1,5 +1,9 @@
 # Change Log
 
+## v1.3.3
+
+* Fixed bug that was improperly setting the defaults for NHL
+
 ## v1.3.2
 
 * Replaced deprecated expect.js reference and replaced with common chai package

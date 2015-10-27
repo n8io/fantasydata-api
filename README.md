@@ -5,7 +5,7 @@ This library is a wrapper for the [FantasyData.com](http://bit.ly/fantasydata)'s
 [![Build Status](https://drone.io/github.com/n8io/fantasydata-api/status.png)](https://drone.io/github.com/n8io/fantasydata-api/latest)
 [![Dependencies](https://david-dm.org/n8io/fantasydata-api.svg)](https://github.com/n8io/fantasydata-api/blob/master/package.json)
 
-#### v1.3.2
+#### v1.3.3
 
 [![NPM](https://nodei.co/npm/fantasydata-api.png?downloads=true&stars=true)](http://bit.ly/npm-downloads-img)
 
