@@ -11,11 +11,15 @@ module.exports = function(options) {
       key: ''
     },
     nfl: {
-      version: 'trial',
+      version: 'nfl/v2',
       key: ''
     },
     mlb: {
       version: 'mlb/v2',
+      key: ''
+    },
+    nhl: {
+      version: 'nhl/v2',
       key: ''
     }
   };
@@ -36,7 +40,7 @@ module.exports = function(options) {
     opts.format = 'json'; // Always json
 
     if(isSetter) {
-      if(!opts || (!opts.nfl && !opts.mlb)) return;
+      if(!opts || (!opts.nfl && !opts.mlb && !opts.mlb && !opts.nhl)) return;
 
       if(opts.nfl && !validateConfig(opts.nfl)) return;
 
