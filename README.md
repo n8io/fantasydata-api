@@ -11,7 +11,7 @@ This library is a wrapper for the [FantasyData.com](http://bit.ly/fantasydata)'s
 [![NPM](https://nodei.co/npm/fantasydata-api.png?downloads=true&stars=true)](http://bit.ly/npm-downloads-img)
 
 ## Intro
-This wrapper provides a simple way of interacting with the exposed methods of FantasyData's various sports apis. Includes methods for MLB, NBA, and NFL.
+This wrapper provides a simple way of interacting with the exposed methods of FantasyData's various sports apis. Includes methods for MLB, NBA, NFL, and NHL.
 
 ## Installation
 This can easily be installed via npm
