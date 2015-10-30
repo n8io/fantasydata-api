@@ -1,6 +1,6 @@
 {
   "name": "fantasydata-api",
-  "version": "1.3.3",
+  "version": "1.3.4",
   "description": "This library is clean and tested wrapper for the FantasyData.com various sports api. Includes methods for MLB, NBA, NFL, and NHL stats.",
   "main": "./server/fantasydata-api.js",
   "homepage": "https://github.com/n8io/fantasydata-api",
@@ -11,8 +11,16 @@
     "type": "git",
     "url": "https://github.com/n8io/fantasydata-api.git"
   },
+  "test": {
+    "reporter": "spec"
+  },
   "scripts": {
-    "test": "mocha ./test/test.js -t 15000"
+    "test": "npm run test-dev",
+    "test-dev": "mocha -R $npm_package_test_reporter test/test.spec.js -t 15000",
+    "test-prod": "npm run coverage && npm run code-climate",
+    "coverage": "istanbul cover --include-all-sources _mocha -- -R $npm_package_test_reporter test/test.spec.js",
+    "code-climate": "codeclimate-test-reporter < coverage/lcov.info",
+    "clean": "rm -rf node_modules/ dist/ coverage/ npm-debug.log"
   },
   "keywords": [
     "FantasyData",
@@ -37,6 +45,8 @@
   },
   "devDependencies": {
     "chai": "^3.4.0",
+    "codeclimate-test-reporter": "^0.1.1",
+    "istanbul": "^0.4.0",
     "mocha": "^2.3.3"
   }
 }

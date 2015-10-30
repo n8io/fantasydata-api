@@ -3,11 +3,11 @@
 This library is a wrapper for the [FantasyData.com](http://bit.ly/fantasydata)'s api. Fully tested using mocha.
 
 [![Codeship Status for n8io/fantasydata-api](https://img.shields.io/codeship/153f1d90-6091-0133-612c-2a268f09630b/master.svg)](https://codeship.com/projects/112220)
-[![node](https://img.shields.io/badge/node-%3E%3D0.12.x-lightgrey.svg)](https://github.com/n8io/fantasydata-api/blob/master/package.json)
 [![Latest stable version](https://img.shields.io/github/release/n8io/fantasydata-api.svg)](https://github.com/n8io/fantasydata-api/releases)
+[![node](https://img.shields.io/badge/node->%3Dv0.12.7-lightgrey.svg)](https://github.com/n8io/fantasydata-api/blob/master/package.json)
 [![Dependencies](https://david-dm.org/n8io/fantasydata-api.svg)](https://github.com/n8io/fantasydata-api/blob/master/package.json)
 
-v1.3.3 [change log](change.md)
+[change log](change.md)
 
 [![NPM](https://nodei.co/npm/fantasydata-api.png?downloads=true&stars=true)](http://bit.ly/npm-downloads-img)
 
