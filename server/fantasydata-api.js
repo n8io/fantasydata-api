@@ -252,6 +252,14 @@ module.exports = function(options) {
 
     makeRequest(uri, callback);
   }
+  
+  FantasyData.mlb.PlayerGameStatsByPlayer = function(gameDateStr, playerId, callback) {
+    var uri = buildMlbUrl('PlayerGameStatsByPlayer/{{gameDateStr}}/{{playerId}}', {gameDateStr: gameDateStr, playerId: playerId});
+
+    makeRequest(uri, callback);
+  }
+  
+  
 
   FantasyData.mlb.playerSeasonStats = function(season, callback) {
     var uri = buildMlbUrl('PlayerSeasonStats/{{season}}', {season: season});
