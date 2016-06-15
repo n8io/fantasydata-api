@@ -173,6 +173,11 @@ module.exports = function(options) {
 
   FantasyData.mlb = {};
 
+  FantasyData.mlb.areAnyGamesInProgress = function(callback) {
+    var uri = buildMlbUrl('AreAnyGamesInProgress');
+
+    makeRequest(uri, callback);
+  };
   FantasyData.mlb.activeTeams = function(callback) {
     var uri = buildMlbUrl('Teams');
 
