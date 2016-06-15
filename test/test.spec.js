@@ -542,6 +542,20 @@ describe('FantasyData', function() {
       });
     });
 
+    describe('.playByPlayDelta()', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.mlb.playByPlayDelta(gameDate, minutes, function(err, results) {
+          if(err) {
+            return done(err);
+          }
+
+          expect(results).to.be.an('array');
+
+          return done();
+        });
+      });
+    });
+
     describe('.stadiums()', function() {
       it('Results should return an array', function(done) {
         FantasyData.mlb.stadiums(function(err, results) {

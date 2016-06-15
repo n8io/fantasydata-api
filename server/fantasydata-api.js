@@ -274,6 +274,12 @@ module.exports = function(options) {
     makeRequest(uri, callback);
   }
 
+  FantasyData.mlb.playByPlayDelta = function(gameDateStr, minutesBack, callback) {
+    var uri = buildMlbUrl('PlayByPlayDelta/{{gameDateStr}}/{{minutesBack}}', {gameDateStr: gameDateStr, minutesBack: minutesBack});
+
+    makeRequest(uri, callback);
+  }
+
   FantasyData.mlb.stadiums = function(callback) {
     var uri = buildMlbUrl('Stadiums');
 
