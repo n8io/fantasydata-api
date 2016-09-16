@@ -305,6 +305,19 @@ describe('FantasyData', function() {
     var playerId = 10000507;
     var team = 'NYY';
 
+    describe('.areAnyGamesInProgress()', function() {
+      it('Results should return a boolean', function(done) {
+        FantasyData.mlb.areAnyGamesInProgress(function(err, results) {
+          if(err) {
+            done(err);
+          }
+
+          expect(results).to.be.a('boolean');
+          done();
+        });
+      });
+    });
+
     describe('.activeTeams()', function() {
       it('Results should return an array', function(done) {
         FantasyData.mlb.activeTeams(function(err, results) {
@@ -518,6 +531,20 @@ describe('FantasyData', function() {
     describe('.playerGameProjectionStatsByDate()', function() {
       it('Results should return an array', function(done) {
         FantasyData.mlb.playerGameProjectionStatsByDate(gameDate, function(err, results) {
+          if(err) {
+            return done(err);
+          }
+
+          expect(results).to.be.an('array');
+
+          return done();
+        });
+      });
+    });
+
+    describe('.playByPlayDelta()', function() {
+      it('Results should return an array', function(done) {
+        FantasyData.mlb.playByPlayDelta(gameDate, minutes, function(err, results) {
           if(err) {
             return done(err);
           }

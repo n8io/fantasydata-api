@@ -173,6 +173,11 @@ module.exports = function(options) {
 
   FantasyData.mlb = {};
 
+  FantasyData.mlb.areAnyGamesInProgress = function(callback) {
+    var uri = buildMlbUrl('AreAnyGamesInProgress');
+
+    makeRequest(uri, callback);
+  };
   FantasyData.mlb.activeTeams = function(callback) {
     var uri = buildMlbUrl('Teams');
 
@@ -265,6 +270,12 @@ module.exports = function(options) {
 
   FantasyData.mlb.playerGameProjectionStatsByDate = function(gameDateStr, callback) {
     var uri = buildMlbUrl('PlayerGameProjectionStatsByDate/{{gameDateStr}}', {gameDateStr: gameDateStr});
+
+    makeRequest(uri, callback);
+  }
+
+  FantasyData.mlb.playByPlayDelta = function(gameDateStr, minutesBack, callback) {
+    var uri = buildMlbUrl('PlayByPlayDelta/{{gameDateStr}}/{{minutesBack}}', {gameDateStr: gameDateStr, minutesBack: minutesBack});
 
     makeRequest(uri, callback);
   }
