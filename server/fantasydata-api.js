@@ -170,6 +170,14 @@ module.exports = function(options) {
 
     makeRequest(uri, callback);
   }
+  
+  FantasyData.nhl.playerDetailsByPlayer = function (playerId, callback) {
+    var uri = buildNhlUrl('Player/{{playerId}}', {
+        playerId: playerId,
+    });
+
+    makeRequest(uri, callback);
+  }
 
   FantasyData.mlb = {};
 
