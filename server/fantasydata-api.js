@@ -170,6 +170,14 @@ module.exports = function(options) {
 
     makeRequest(uri, callback);
   }
+  
+  FantasyData.nhl.playerDetailsByPlayer = function (playerId, callback) {
+    var uri = buildNhlUrl('Player/{{playerId}}', {
+        playerId: playerId,
+    });
+
+    makeRequest(uri, callback);
+  }
 
   FantasyData.mlb = {};
 
@@ -243,12 +251,28 @@ module.exports = function(options) {
 
     makeRequest(uri, callback);
   }
+  
+  FantasyData.mlb.playerDetailsByPlayer = function (playerId, callback) {
+    var uri = buildMlbUrl('Player/{{playerId}}', {
+        playerId: playerId,
+    });
+
+    makeRequest(uri, callback);
+}
 
   FantasyData.mlb.playerGameStatsByDate = function(gameDateStr, callback) {
     var uri = buildMlbUrl('PlayerGameStatsByDate/{{gameDateStr}}', {gameDateStr: gameDateStr});
 
     makeRequest(uri, callback);
   }
+  
+  FantasyData.mlb.playerGameStatsByPlayer = function(gameDateStr, playerId, callback) {
+    var uri = buildMlbUrl('PlayerGameStatsByPlayer/{{gameDateStr}}/{{playerId}}', {gameDateStr: gameDateStr, playerId: playerId});
+
+    makeRequest(uri, callback);
+  }
+  
+  
 
   FantasyData.mlb.playerSeasonStats = function(season, callback) {
     var uri = buildMlbUrl('PlayerSeasonStats/{{season}}', {season: season});
@@ -270,6 +294,12 @@ module.exports = function(options) {
 
   FantasyData.mlb.playerGameProjectionStatsByDate = function(gameDateStr, callback) {
     var uri = buildMlbUrl('PlayerGameProjectionStatsByDate/{{gameDateStr}}', {gameDateStr: gameDateStr});
+
+    makeRequest(uri, callback);
+  }
+  
+  FantasyData.mlb.playerGameProjectionStatsByPlayer = function(gameDateStr, playerId, callback) {
+    var uri = buildMlbUrl('PlayerGameProjectionStatsByPlayer/{{gameDateStr}}/{{playerId}}', {gameDateStr: gameDateStr, playerId: playerId});
 
     makeRequest(uri, callback);
   }
