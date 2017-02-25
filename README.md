@@ -43,6 +43,55 @@ var options = {
     key: '' // <-- Pass in your nhl key here
   }
 };
+
+var options_v3_stats = {
+  timeout: 15000, // Service call timeout
+  nba: {
+    version: 'v3/nba/stats',
+    key: '' // <-- Pass in your nba key here
+  },
+  nfl: {
+    version: 'v3/nfl/stats',
+    key: '' // <-- Pass in your nfl key here
+  }
+};
+
+var options_v3_scores = {
+  timeout: 15000, // Service call timeout
+  nba: {
+    version: 'v3/nba/scores',
+    key: '' // <-- Pass in your nba key here
+  },
+  nfl: {
+    version: 'v3/nfl/scores',
+    key: '' // <-- Pass in your nfl key here
+  }
+};
+
+var options_v3_projections = {
+  timeout: 15000, // Service call timeout
+  nba: {
+    version: 'v3/nba/projections',
+    key: '' // <-- Pass in your nba key here
+  },
+  nfl: {
+    version: 'v3/nfl/projections',
+    key: '' // <-- Pass in your nfl key here
+  }
+};
+
+var options_v3_pbp = {
+  timeout: 15000, // Service call timeout
+  nba: {
+    version: 'v3/nba/pbp',
+    key: '' // <-- Pass in your nba key here
+  },
+  nfl: {
+    version: 'v3/nfl/pbp',
+    key: '' // <-- Pass in your nfl key here
+  }
+};
+
 ```
 
 ## Example Usage
@@ -53,6 +102,14 @@ var season = '2014REG';
 fantasyData.nfl.Byes(season, function(err, results){
   console.log(JSON.stringify(results, null, 2));
 });
+
+var fantasyDataV3Scores = require('fantasydata-api')(options_v3_scores);
+
+var season = '2014REG';
+fantasyDataV3Scores.nfl.Byes(season, function(err, results){
+  console.log(JSON.stringify(results, null, 2));
+});
+
 ```
 
 ## Parameters
@@ -140,6 +197,7 @@ All methods are asynchronous and require the last parameter to be a callback fun
   * ```.playerGameStatsByPlayerId(season, week, playerId, callback)```
   * ```.playerGameStatsByTeam(season, week, team, callback)```
   * ```.playerGameStatsByWeek(season, week, callback)```
+  * ```.playerSeasonStats(season, callback)```
   * ```.playerSeasonStatsByPlayerId(season, playerId, callback)```
   * ```.playerSeasonStatsByTeam(season, team, callback)```
   * ```.recentlyUpdatedBoxScores(minutes, callback)```
@@ -174,6 +232,7 @@ All methods are asynchronous and require the last parameter to be a callback fun
   * ```.playerSeasonStats(season, callback)```
   * ```.playerSeasonStatsByTeam(season, team, callback)```
   * ```.playersByTeam(team, callback)```
+  * ```.player(playerId, callback)```
   * ```.playerGameProjectionStatsByDate(dateStr, callback)```
   * ```.stadiums(callback)```
   * ```.teamGameStatsByDate(dateStr, callback)```
