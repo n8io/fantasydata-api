@@ -170,7 +170,7 @@ module.exports = function(options) {
 
     makeRequest(uri, callback);
   }
-  
+
   FantasyData.nhl.playerDetailsByPlayer = function (playerId, callback) {
     var uri = buildNhlUrl('Player/{{playerId}}', {
         playerId: playerId,
@@ -251,7 +251,7 @@ module.exports = function(options) {
 
     makeRequest(uri, callback);
   }
-  
+
   FantasyData.mlb.playerDetailsByPlayer = function (playerId, callback) {
     var uri = buildMlbUrl('Player/{{playerId}}', {
         playerId: playerId,
@@ -265,14 +265,14 @@ module.exports = function(options) {
 
     makeRequest(uri, callback);
   }
-  
+
   FantasyData.mlb.playerGameStatsByPlayer = function(gameDateStr, playerId, callback) {
     var uri = buildMlbUrl('PlayerGameStatsByPlayer/{{gameDateStr}}/{{playerId}}', {gameDateStr: gameDateStr, playerId: playerId});
 
     makeRequest(uri, callback);
   }
-  
-  
+
+
 
   FantasyData.mlb.playerSeasonStats = function(season, callback) {
     var uri = buildMlbUrl('PlayerSeasonStats/{{season}}', {season: season});
@@ -297,7 +297,7 @@ module.exports = function(options) {
 
     makeRequest(uri, callback);
   }
-  
+
   FantasyData.mlb.playerGameProjectionStatsByPlayer = function(gameDateStr, playerId, callback) {
     var uri = buildMlbUrl('PlayerGameProjectionStatsByPlayer/{{gameDateStr}}/{{playerId}}', {gameDateStr: gameDateStr, playerId: playerId});
 
@@ -419,6 +419,12 @@ module.exports = function(options) {
 
     makeRequest(uri, callback);
   }
+
+  FantasyData.nba.player = function(playerId, callback) {
+    var uri = buildNbaUrl('Player/{{playerId}}', {playerId: playerId});
+
+    makeRequest(uri, callback);
+  };
 
   FantasyData.nba.playerGameProjectionStatsByDate = function(gameDateStr, callback) {
     var uri = buildNbaUrl('PlayerGameProjectionStatsByDate/{{gameDateStr}}', {gameDateStr: gameDateStr});
@@ -628,6 +634,12 @@ module.exports = function(options) {
 
   FantasyData.nfl.playerGameStatsByWeek = function(season, week, callback) {
     var uri = buildNflUrl('PlayerGameStatsByWeek/{{season}}/{{week}}', {season: season, week: week});
+
+    makeRequest(uri, callback);
+  };
+
+  FantasyData.nfl.playerSeasonStats = function(season, callback) {
+    var uri = buildNflUrl('PlayerSeasonStats/{{season}}', {season: season});
 
     makeRequest(uri, callback);
   };

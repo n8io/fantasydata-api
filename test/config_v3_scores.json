@@ -1,0 +1,12 @@
+{
+  "debug": false,
+  "timeout": 15000,
+  "nfl": {
+    "key": "",
+    "version": "v3/nfl/scores"
+  },
+  "nba": {
+    "key": "",
+    "version": "v3/nba/scores"
+  }
+}
